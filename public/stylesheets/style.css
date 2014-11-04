@@ -1,0 +1,37 @@
+html {
+  min-height: 100%;
+  position: relative;
+}
+body {
+  margin-bottom: 90px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+.footer {
+  background-color: #f5f5f5;
+  bottom: 0;
+  height: 90px;
+  position: absolute;
+  width: 100%;
+  text-align: center;
+}
+.container {
+  padding: 0 15px;
+  width: auto;
+}
+.container .text-muted {
+  margin: 20px 0;
+}
+
+
+a {
+  color: #00B7FF;
+}
+
+#imageAccueil{
+  width: 500px;
+}
+
+#imageInstructions{
+  width: 300px;
+}

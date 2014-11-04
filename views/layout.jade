@@ -1,0 +1,30 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/bootstrap/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
+  body
+    div(class="container")
+      ul(class="nav nav-tabs nav-justified")
+        li
+          a(href="/" role="presentation" class="active") Acceuil
+        li
+          a(href="/tableauDeBord" role="presentation" class="active") Tableau de Bord
+        li
+          a(href="/instructions" role="presentation" class="active") Instructions
+      h1= title
+      div(class="row")
+        div(class="col-xs-12 col-md-10")
+          block content
+        div(class="col-xs-6 col-md-2")
+          p test
+    div(class="footer")
+      div(class="container")
+        div(class="text-muted") 
+          p Thomas BILLE
+          p Garing TANG
+    
+    script(src='/bootstrap/js/bootstrap.min.js')
+    script(src='/javascripts/' + JS + '.js')

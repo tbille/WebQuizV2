@@ -1,0 +1,36 @@
+extends layout
+
+block content
+  section(class="test")
+    h2 Début d'un test rapide
+    p Le test rapide vous permet de vous préparer avant votre examen officiel.
+    a(href="/testRapide") Test Rapide
+  
+  section(class="examen")
+    h2 Début d'un examen officiel
+    // <div class="alert-box error" hidden>
+      <img src="src/image/error.png" alt="erreur" id="erreurmsg"/>
+      <span> Oops! </span>
+      <p class="msgErreur"></p>
+      </div> 
+    form(method="post" action="/examen")
+      p Choisissez le domaine des questions :
+
+      div(class="checkbox")
+        label
+          input(type="checkbox" value="") 
+          | tHTML5 (maximum 4 questions)
+      div(class="checkbox")
+        label
+          input(type="checkbox" value="")
+          | CSS3 (maximum 3 questions)
+      div(class="checkbox")
+        label
+          input(type="checkbox" value="")
+          | Javascript (maximum 3 questions)
+
+
+      p Choisissez le nombre de questions :
+      input(type="number" min="1" max="10" value="1")
+      input(type="submit" value="Examen officiel" id="monSubmit")
+      
