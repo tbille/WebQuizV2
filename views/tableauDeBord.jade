@@ -4,33 +4,32 @@ block content
   section(class="test")
     h2 Début d'un test rapide
     p Le test rapide vous permet de vous préparer avant votre examen officiel.
-    a(href="/testRapide") Test Rapide
+    a(href="/testRapide" class="bouton") Test Rapide
   
   section(class="examen")
     h2 Début d'un examen officiel
-    // <div class="alert-box error" hidden>
-      <img src="src/image/error.png" alt="erreur" id="erreurmsg"/>
-      <span> Oops! </span>
-      <p class="msgErreur"></p>
-      </div> 
-    form(method="post" action="/examen")
+
+    if error == true
+      div(class="alert alert-danger alert-dismissible" role="alert")
+        button(type="button" class="close" data-dismiss="alert")
+          span(aria-hidden="true") &times;
+          span(class="sr-only") Close
+        strong Warning ! 
+        div(class="msgErreur")=message
+
+
+    form(method="post")
       p Choisissez le domaine des questions :
-
-      div(class="checkbox")
-        label
-          input(type="checkbox" value="") 
-          | tHTML5 (maximum 4 questions)
-      div(class="checkbox")
-        label
-          input(type="checkbox" value="")
-          | CSS3 (maximum 3 questions)
-      div(class="checkbox")
-        label
-          input(type="checkbox" value="")
-          | Javascript (maximum 3 questions)
-
-
+      //
+        boucle pour les afficher les domaines
+      for domaine in domaines
+        div(class="checkbox") 
+          label
+            input(type="checkbox" value="#{domaine.id}") 
+            | #{domaine.nom}
+      //
+        nombre de questions
       p Choisissez le nombre de questions :
-      input(type="number" min="1" max="10" value="1")
-      input(type="submit" value="Examen officiel" id="monSubmit")
+      input(type="number" min="1" max="10" value="1" name="nbQuestions")
+      input(type="submit" value="Examen officiel" id="monSubmit" class="bouton")
       

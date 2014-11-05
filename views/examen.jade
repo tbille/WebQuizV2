@@ -1,4 +1,23 @@
 extends layout
 
 block content
-  h1 test
+  section
+    h2 Question
+    fieldset
+      p(id="numQuestion") Ma question
+      div(class="radio")
+        label
+          input(type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked) 
+          | HTML5 (maximum 4 questions)
+      div(class="radio")
+        label
+          input(type="radio" name="optionsRadios" id="optionsRadios2" value="option2")
+          | CSS3 (maximum 3 questions)
+      div(class="radio")
+        label
+          input(type="radio" name="optionsRadios" id="optionsRadios3" value="option3")
+          | Javascript (maximum 3 questions)
+    a(href="tableauDeBord" class="bouton") Abandonner
+    a(href="#" class="bouton") Corriger
+    a(href="#" class="bouton" hidden) Question Suivante
+    a(href="#" class="bouton" hidden) Fin Questionnaire

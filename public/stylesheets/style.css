@@ -7,8 +7,16 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
+.contenu{
+  padding:15px;
+}
+
+/*
+  Me permet de coller le footer en bas de page
+ */
 .footer {
-  background-color: #f5f5f5;
+  background:#CECECE;
+  color: #475673;
   bottom: 0;
   height: 90px;
   position: absolute;
@@ -16,22 +24,156 @@ body {
   text-align: center;
 }
 .container {
-  padding: 0 15px;
+  padding: 0px;
   width: auto;
 }
+/*
+  Texte dans le footer
+ */
 .container .text-muted {
   margin: 20px 0;
 }
 
-
-a {
-  color: #00B7FF;
-}
-
+/*
+  Taille des images
+ */
 #imageAccueil{
   width: 500px;
 }
 
 #imageInstructions{
   width: 300px;
+} 
+
+a {
+  color: #00B7FF;
+}
+
+/*
+
+  Menu
+
+*/
+.menu {
+  background: #f96e5b;
+}
+.menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0px;
+  line-height: 1;
+  display: block;
+  zoom: 1;
+}
+.menu ul:after {
+  content: " ";
+  display: block;
+  font-size: 0;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+.menu ul li {
+ /* display: inline-block; */
+  padding: 0;
+  margin: 0;
+}
+.menu.align-right ul li {
+  float: right;
+}
+.menu.align-center ul {
+  text-align: center;
+}
+.menu ul li a {
+  color: #ffffff;
+  text-decoration: none;
+  display: block;
+  padding: 15px 25px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 14px;
+  position: relative;
+  transition: color .25s;
+  transition: color .25s;
+  transition: color .25s;
+  transition: color .25s;
+  transition: color .25s;
+}
+
+.menu ul li a:hover {
+  color: #475673;
+  background: #f96e5b;
+}
+
+.menu ul li a:hover:before {
+  width: 100%;
+}
+.menu ul li a:after {
+  content: "";
+  display: block;
+  position: absolute;
+  right: -3px;
+  top: 19px;
+  height: 6px;
+  width: 6px;
+  background: #FFFFFF;
+  opacity: .5;
+}
+.menu ul li a:before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 0;
+  background: #475673;
+  transition: width .25s;
+  transition: width .25s;
+  transition: width .25s;
+  transition: width .25s;
+  transition: width .25s;
+}
+.menu ul li.last > a:after,
+.menu ul li:last-child > a:after {
+  display: none;
+}
+.menu ul li.active a {
+  color: #475673;
+}
+.menu ul li.active a:before {
+  width: 100%;
+}
+.menu.align-right li.last > a:after,
+.menu.align-right li:last-child > a:after {
+  display: block;
+}
+.menu.align-right li:first-child a:after {
+  display: none;
+}
+
+
+/* Bouton */ 
+
+.bouton {
+  border-radius: 5;
+  border-radius: 5;
+  border-radius: 5px;
+  font-family: 'Open Sans', sans-serif;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 14px;
+  background: #f96e5b;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+  position: relative;
+  top: 15px;
+  margin-botton: 15px;
+ }
+
+.bouton:hover {
+  background: #fb998c;
+  text-decoration: none;
 }
