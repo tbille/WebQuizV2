@@ -1,12 +1,12 @@
 extends layout
 
 block content
-  section(class="test")
+  section(class="test maSection")
     h2 Début d'un test rapide
     p Le test rapide vous permet de vous préparer avant votre examen officiel.
     a(href="/testRapide" class="bouton") Test Rapide
   
-  section(class="examen")
+  section(class="examen maSection")
     h2 Début d'un examen officiel
 
     if error == true
@@ -25,7 +25,7 @@ block content
       for domaine in domaines
         div(class="checkbox") 
           label
-            input(type="checkbox" value="#{domaine.id}") 
+            input(type="checkbox" value="#{domaine.id}" name="maCB") 
             | #{domaine.nom}
       //
         nombre de questions

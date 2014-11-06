@@ -5,6 +5,7 @@ html {
 body {
   margin-bottom: 90px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #F3F4F5 ;
 }
 
 .contenu{
@@ -47,6 +48,23 @@ body {
 
 a {
   color: #00B7FF;
+}
+
+/*
+
+  Tableau de bord
+
+*/
+.maSection{
+  margin-bottom: 50px;
+  background-color:  #A5BBCF;
+  padding: 20px;
+  padding-bottom: 40px;
+  border-radius:10px;
+}
+
+img{
+  border-radius:10px;
 }
 
 /*

@@ -2,8 +2,21 @@ var express = require('express');
 var router = express.Router();
 var db = require('../lib/db');
 
+/*
+
+  Variables pour les messages d'erreur pour le tableau de bord
+
+*/
 var error =false;
 var msgError="";
+
+/*
+
+  Variables pour les Examen
+
+*/
+var mesDomainesExamen=null;
+var nbQuestionsExamen=null;
 
 /* 
 
@@ -21,29 +34,41 @@ router.get('/', function (req, res) {
 
 */
 router.get('/tableauDeBord', function (req, res) {
+
+  var domaines = db.getAllDomaines();
   if(!error){
-
-    var domaines = db.getAllDomaines();
-
     res.render('tableauDeBord', { title: 'Mon tableau de bord' , JS: 'tdb', domaines: domaines});
   }
   else{
-    res.render('tableauDeBord', { title: 'Mon tableau de bord' , JS: 'tdb', error: true, message: msgError});
+    res.render('tableauDeBord', { title: 'Mon tableau de bord' , JS: 'tdb', domaines: domaines, error: true, message: msgError});
     error=false;
     msgError="";
   }
-  console.log(getNameDomaineFromID(1));
 });
 
 router.post('/tableauDeBord', function (req, res) {
   // contrôle saisie
-  if(req.param('nbQuestions')<1 || req.param('nbQuestions')>10){
+  
+  // controle si la case été coché
+  if(typeof req.param('maCB') == 'undefined'){
+    error = true;
+    msgError = "Il faut cocher au moins un domaine de question";
+  }
+  // controle si on prend assez de paramèters
+  if(!error && (req.param('nbQuestions')<1 || req.param('nbQuestions')>10)){
     error=true;
-    msgError = "Nombre de questions invalide."
+    msgError = "Nombre de questions invalide.";
+  }
+
+  if(error){
+      // je redirige en GET sur le tableau de bord s'il y a une erreur
     res.redirect('/tableauDeBord');
   }
   else{
-    tesst = req.param('nbQuestions');
+    // j'enregistre les valeurs pour pouvoir récuperer les valeurs dans la page examen
+    mesDomainesExamen =req.param('maCB') ;
+    nbQuestionsExamen = req.param('nbQuestions') ;
+    // redirection en GET sur la page d'examen
     res.redirect('/examen');
   }
 });
