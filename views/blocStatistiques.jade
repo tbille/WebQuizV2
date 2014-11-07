@@ -1,17 +1,19 @@
 aside(class= "stats")
   h1 Statistiques
-  
-    section(id= "CumulTestRapide") 
-      h2 
-      p
-    section(id= "CumulExamen")
-      h2 
-      p
-    section(id= "noteCouranteTest")
-      h2
-      p
-    section(id= "noteCouranteExam")
-      h2
-      p
+    if title == "Mon tableau de bord"
+      section(id= "CumulTestRapide") 
+        h2 Note cumulative Test Rapide
+        p
+      section(id= "CumulExamen")
+        h2 Note moyenne Examen
+        p
+    else if title == "Test Rapide"    
+      section(id= "noteCouranteTest")
+        h2 Note courante Test Rapide
+        p
+    else 
+      section(id= "noteCouranteExam")
+        h2 Note courante Examen
+        p
     p: a(href="#modal-one" class="bouton") Voir détails
     p: button(id= "reset_it") Remise à zéro
