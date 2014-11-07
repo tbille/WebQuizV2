@@ -18,7 +18,7 @@ var msgError="";
 var mesDomainesExamen=null;
 var nbQuestionsExamen=null;
 
-/* 
+/*    
 
   GET home page. 
 
@@ -100,7 +100,6 @@ router.get('/resultat', function (req, res) {
 
 */
 router.get('/examen', function (req, res) {
-  console.log("nb Questiosns : "  + tesst);
   res.render('examen', { title: 'Examen' , JS: 'examen'});
 });
 
@@ -111,7 +110,9 @@ router.get('/examen', function (req, res) {
 
 */
 router.get('/testRapide', function (req, res) {
-  res.render('testRapide', { title: 'Test Rapide' , JS: 'testRapide'});
+  var maQuestion = db.getRandomQuestion();
+  console.log(maQuestion.reponses);
+  res.render('testRapide', { title: 'Test Rapide' , JS: 'testRapide', question: maQuestion});
 });
 
 module.exports = router;

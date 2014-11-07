@@ -4,19 +4,13 @@ block content
   section(class="maSection")
     h2 Question
     fieldset
-      p Ma question
-      div(class="radio")
-        label
-          input(type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked) 
-          | HTML5 (maximum 4 questions)
-      div(class="radio")
-        label
-          input(type="radio" name="optionsRadios" id="optionsRadios2" value="option2")
-          | CSS3 (maximum 3 questions)
-      div(class="radio")
-        label
-          input(type="radio" name="optionsRadios" id="optionsRadios3" value="option3")
-          | Javascript (maximum 3 questions)
+      p= question.question 
+      each reponse,index in question.reponses
+        div(class="radio")
+          label
+            input(type="radio" name="optionsRadios" id="optionsRadios#{index}" value="option#{index}") 
+            | #{reponse}
+
     a(href="tableauDeBord" class="bouton") Abandonner
     a(href="#" class="bouton") Corriger
     a(href="#" class="bouton" hidden) Question Suivante
