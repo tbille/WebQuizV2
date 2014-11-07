@@ -10,7 +10,7 @@ html
       div(class="menu")
         ul(class="nav nav-tabs nav-justified")
           li
-            a(href="/" role="presentation" class="active") Acceuil
+            a(href="/" role="presentation" class="active") Accueil
           li
             a(href="/tableauDeBord" role="presentation" class="active") Tableau de Bord
           li
@@ -21,12 +21,15 @@ html
           div(class="col-xs-12 col-md-9")
             block content
           div(class="col-xs-6 col-md-3")
-            p test
+            include ./blocStatistiques.jade
+  
     div(class="footer")
       div(class="container")
         div(class="text-muted") 
           p Thomas BILLE
           p Garing TANG
+          
+
     
     script(src='/bootstrap/js/bootstrap.min.js')
     // script(src='/javascripts/' + JS + '.js')

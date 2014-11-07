@@ -196,3 +196,48 @@ img{
   background: #fb998c;
   text-decoration: none;
 }
+
+/* Barre statistiques */
+aside {
+  display: block;
+  background-color:#6C7B92;
+  position: fixed;
+  right: 0%;
+  border-radius: 10px 0 0 10px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: #ffffff;
+  /*width: 30%; */
+  padding: 36px;
+}
+
+aside p {
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+aside h1 {
+  color: #fb998c;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  font-size: 26px;
+}
+
+aside h2 {
+  color: #D6E0E9;
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+aside button {
+ border-radius: 5;
+ border-radius: 5;
+ border-radius: 5px;
+ font-family: 'Open Sans', sans-serif;
+ text-transform: uppercase;
+ font-weight: 700;
+ font-size: 14px;
+ margin-top: 35px; 
+ color: #475673;
+ padding: 10px 10px 10px 10px;
+}
