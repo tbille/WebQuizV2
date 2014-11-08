@@ -17,7 +17,7 @@ body {
  */
 .footer {
   background:#CECECE;
-  color: #475673;
+  color: #475673; 
   bottom: 0;
   height: 90px;
   position: absolute;
@@ -59,7 +59,7 @@ a {
   margin-bottom: 50px;
   background-color:  #A5BBCF;
   padding: 20px;
-  padding-bottom: 40px;
+  padding-bottom: 60px;
   border-radius:10px;
 }
 
@@ -197,6 +197,10 @@ img{
   text-decoration: none;
 }
 
+.bouton ~ .bouton {
+  margin-left: 10px;
+}
+
 /* Barre statistiques */
 aside {
   display: block;
@@ -219,8 +223,7 @@ aside p {
 aside h1 {
   color: #fb998c;
   margin-bottom: 10px;
-  text-transform: uppercase;
-  font-size: 26px;
+  font-size: 30px;
 }
 
 aside h2 {
@@ -237,7 +240,11 @@ aside button {
  text-transform: uppercase;
  font-weight: 700;
  font-size: 14px;
- margin-top: 35px; 
+ margin-top: 30px; 
  color: #475673;
  padding: 10px 10px 10px 10px;
+}
+
+aside button:hover {
+  color: #607eb7;
 }
