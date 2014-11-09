@@ -27,15 +27,11 @@ h2 {
 }
 
 p {
-  color: #5e5e5e;
   font-size: 16px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
-.checkbox {
-  color: #5e5e5e;
-}
-
-  
 
 /*
   Me permet de coller le footer en bas de page
@@ -236,7 +232,6 @@ aside {
   margin-top: 20px;
   margin-bottom: 10px;
   color: #ffffff;
-  /*width: 30%; */
   padding: 36px;
 }
 
@@ -328,3 +323,15 @@ section#lightbox li {
   
 /* FIN FENETRE MODAL */
 
+
+/* Responsive design format tablette */
+
+@media screen and (max-width: 768px) {
+  aside {
+    clear: both;
+    position: inherit;
+    bottom:-30px;
+    border-radius: 10px 10px 10px 10px;
+    width: 96%;
+  }
+}
