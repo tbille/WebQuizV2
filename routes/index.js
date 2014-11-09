@@ -23,6 +23,8 @@ var nbQuestionsExamen=null;
   GET home page. 
 
 */
+
+
 router.get('/', function (req, res) {
   res.render('index', { title: 'WebQuiz' , JS: 'acceuil'});
 });

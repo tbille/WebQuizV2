@@ -1,4 +1,8 @@
 if title != "WebQuiz"
+  section(id="lightbox")
+    a(href="#", class="close_msg")
+      ul
+        li Résultats détaillés des examens
   aside(class= "stats")
     h1 Statistiques
       if title == "Mon tableau de bord"
@@ -8,6 +12,8 @@ if title != "WebQuiz"
         section(id= "CumulExamen")
           h2 Note moyenne Examen
           p
+        p: a(href="#lightbox", class="bouton") Voir détails
+        p: button(id= "reset_it") Remise à zéro  
       else if title == "Test Rapide"    
         section(id= "noteCouranteTest")
           h2 Note courante Test Rapide
@@ -16,5 +22,3 @@ if title != "WebQuiz"
         section(id= "noteCouranteExam")
           h2 Note courante Examen
           p
-      p: a(href="#modal-one" class="bouton") Voir détails
-      p: button(id= "reset_it") Remise à zéro
