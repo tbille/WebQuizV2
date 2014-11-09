@@ -330,8 +330,8 @@ section#lightbox li {
   aside {
     clear: both;
     position: inherit;
-    bottom:-30px;
+    /*bottom:-30px;*/
     border-radius: 10px 10px 10px 10px;
-    width: 96%;
+    /*width: 96%;*/
   }
 }
