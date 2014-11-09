@@ -36,11 +36,11 @@ tableau d'examen[
 
 /* Initialise les stats au debut de la session*/
 
-var isInitialise = function(){
-	if( localStorage.getItem("resTestsRapide")!=null && localStorage.getItem("tabExamen")!=null) {
+var isInitialise = function () {
+	if (localStorage.getItem("resTestsRapide") !== null && localStorage.getItem("tabExamen") !== null) {
 		return true;
 	}
-	else{
+	else {
 		return false;
 	}
 }
