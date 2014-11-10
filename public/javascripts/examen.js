@@ -92,7 +92,7 @@ $("#correction").click( function(){
 	if($("input:radio[name='optionsRadios']").is(":checked")){ 
 
 		// Controle si la réponse est bonne ( comparaison avec le text de la répons coché )
-		if ( monTableauQuestions[questionActuelle].reponses[monTableauQuestions[questionActuelle].bonneReponse -1] == $("input:radio[name='optionsRadios']:checked").parent().text() ){
+		if ((parseInt($("div.reponse").text())-1) === (parseInt($('input[name=optionsRadios]:checked').val()))){
 			// ici je met le texte en vert si la réponse est bonne
 			$("input:radio[name='optionsRadios']:checked").parent().css({
 				"background-color": '#aedbae',	
@@ -107,7 +107,7 @@ $("#correction").click( function(){
 		else{
 			// ici je met le texte en vert pour la bonne réponse
 			  $("input:radio[name='optionsRadios']").each(function(){
-			  	if ( monTableauQuestions[questionActuelle].reponses[monTableauQuestions[questionActuelle].bonneReponse -1] == $(this).parent().text() ){
+			  	if ((parseInt($("div.reponse").text())-1) == parseInt($(this).val())){
 					// ici je met le texte en vert si la réponse est bonne
 					$(this).parent().css({
 						"background-color": '#aedbae',
