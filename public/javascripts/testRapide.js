@@ -13,6 +13,9 @@ var monTableauQuestions;
 
 $(document).ready(function () {
 	
+	alert(${question.bonneReponse});
+
+	/*
 	// initialisation à faire dans chaque fichier pour vérifier si les varibles en locales sont initialisée
 	if (!isInitialise()) {
 		initialiaseVariables();
@@ -57,6 +60,8 @@ $(document).ready(function () {
 	}
 	// ici je uncheck tous les boutons radio
 	$("input:radio").attr("checked", false);
+
+	*/
 });
 
 
@@ -123,6 +128,7 @@ $("#correction").click( function(){
 	}
 });
 
+/*
 
 // on click on Question Suivante
 $("#questionSuivante").click( function(){
