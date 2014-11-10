@@ -11,6 +11,7 @@ var questionActuelle;
 // le tableau des question importé sur la page
 var monTableauQuestions;
 
+/*
 $(document).ready(function () {
 	
 	alert(${question.bonneReponse});
@@ -61,10 +62,10 @@ $(document).ready(function () {
 	// ici je uncheck tous les boutons radio
 	$("input:radio").attr("checked", false);
 
-	*/
-});
 
+}); 
 
+*/
 
 
 
@@ -73,7 +74,7 @@ $("#correction").click( function(){
 	if($("input:radio[name='optionsRadios']").is(":checked")){ 
 
 		// Controle si la réponse est bonne ( comparaison avec le text de la répons coché )
-		if ( monTableauQuestions[questionActuelle].reponses[monTableauQuestions[questionActuelle].bonneReponse -1] == $("input:radio[name='optionsRadios']:checked").parent().text() ){
+		if (($(question.bonneReponse)) == $("input:radio[name='optionsRadios']:checked").parent().text()){
 			// ici je met le texte en vert si la réponse est bonne
 			$("input:radio[name='optionsRadios']:checked").parent().css({
 				"background-color": '#aedbae',	
@@ -88,7 +89,7 @@ $("#correction").click( function(){
 		else{
 			// ici je met le texte en vert pour la bonne réponse
 			  $("input:radio[name='optionsRadios']").each(function(){
-			  	if ( monTableauQuestions[questionActuelle].reponses[monTableauQuestions[questionActuelle].bonneReponse -1] == $(this).parent().text() ){
+			  	if (".bonneReponse") {
 					// ici je met le texte en vert si la réponse est bonne
 					$(this).parent().css({
 						"background-color": '#aedbae',
@@ -165,7 +166,11 @@ function reset_me(){
  }
 
 
+// Si c'est la bonne réponse
+/*
+$(question.bonneReponse)
 
+div(class="reponse" hidden) ${ question.bonneReponse }  */
 
 
 		

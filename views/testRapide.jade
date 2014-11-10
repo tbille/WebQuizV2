@@ -4,6 +4,7 @@ block content
   section(class="maSection")
     h2 Question
     fieldset
+
       p= question.question
       form(method="post")
         each reponse,index in question.reponses
@@ -14,3 +15,5 @@ block content
         a(href="tableauDeBord" class="bouton") Abandonner
         // a(href="#" id="correction" class="bouton") Corriger
         input(type="submit" value="Question Suivante" id="correction" class="bouton")
+  
+  div(class="reponse")  question.bonneReponse
