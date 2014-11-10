@@ -15,8 +15,10 @@ var msgError="";
   Variables pour les Examen
 
 */
-var mesDomainesExamen=null;
+var mesDomainesExamen=[];
 var nbQuestionsExamen=null;
+var numQuestion=0;
+var questionsPasses=[];
 
 /*
 
@@ -72,8 +74,15 @@ router.post('/tableauDeBord', function (req, res) {
   }
   else{
     // j'enregistre les valeurs pour pouvoir récuperer les valeurs dans la page examen
-    mesDomainesExamen =req.param('maCB') ;
+    mesDomainesExamen=[];
+    for (var i = 0; i < req.param('maCB').length; i++) {
+      if(!isNaN(parseFloat(req.param('maCB')[i])) && isFinite(req.param('maCB')[i])){
+        mesDomainesExamen.push(parseInt(req.param('maCB')[i] ));
+      }
+    };
     nbQuestionsExamen = req.param('nbQuestions') ;
+    numQuestion=1;
+    questionsPasses=[];
     // redirection en GET sur la page d'examen
     res.redirect('/examen');
   }
@@ -106,11 +115,22 @@ router.get('/resultat', function (req, res) {
 
 */
 router.get('/examen', function (req, res) {
-  console.log("yo");
-  maQuestion = db.getRandomQuestion(mesDomainesExamen);
-  res.render('examen', { title: 'Examen' , JS: 'examen', question: maQuestion});
+
+  if(numQuestion <= db.getNumQuestions(mesDomainesExamen)){
+    maQuestion = db.getRandomQuestion(mesDomainesExamen,questionsPasses);
+    monDomaine = db.getNameDomaineFromID(maQuestion.domaine);
+    questionsPasses.push(parseInt(maQuestion.id));
+    res.render('examen', { title: 'Examen' , JS: 'examen', question: maQuestion, numeroQuestion : numQuestion, domaine : monDomaine});
+  }
+  else{
+    res.redirect('/tableauDeBord');
+  }
 });
 
+router.post('/examen', function (req, res) {
+  numQuestion++;
+  res.redirect('/examen');
+});
 
 /* 
 

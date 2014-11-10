@@ -2,7 +2,7 @@ extends layout
 
 block content
   section(class= "maSection")
-    h2(id="numQuestion") Question
+    h2(id="numQuestion") Question - #{numeroQuestion} - #{domaine}
     fieldset
       p= question.question
       form(method="post")
@@ -11,7 +11,7 @@ block content
             label
               input(type="radio" name="optionsRadios" id="optionsRadios#{index}" value="#{index}") 
               | #{reponse}
-    a(href="tableauDeBord" class="bouton") Abandonner
-    a(href="#" id="correction" class="bouton") Corriger
-    a(href="#" class="bouton" hidden) Question Suivante
-    a(href="#" class="bouton" hidden) Fin Questionnaire
+        a(href="tableauDeBord" class="bouton") Abandonner
+        // a(href="#" id="correction" class="bouton") Corriger
+        input(type="submit" value="Question Suivante" id="correction" class="bouton")
+        a(href="#" class="bouton" hidden) Fin Questionnaire
