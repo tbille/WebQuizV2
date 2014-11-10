@@ -2,21 +2,15 @@ extends layout
 
 block content
   section(class= "maSection")
-    h2 Question
+    h2(id="numQuestion") Question
     fieldset
-      p(id="numQuestion") Ma question
-      div(class="radio")
-        label
-          input(type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked) 
-          | HTML5 (maximum 4 questions)
-      div(class="radio")
-        label
-          input(type="radio" name="optionsRadios" id="optionsRadios2" value="option2")
-          | CSS3 (maximum 3 questions)
-      div(class="radio")
-        label
-          input(type="radio" name="optionsRadios" id="optionsRadios3" value="option3")
-          | Javascript (maximum 3 questions)
+      p= question.question
+      form(method="post")
+        each reponse,index in question.reponses
+          div(class="radio")
+            label
+              input(type="radio" name="optionsRadios" id="optionsRadios#{index}" value="#{index}") 
+              | #{reponse}
     a(href="tableauDeBord" class="bouton") Abandonner
     a(href="#" id="correction" class="bouton") Corriger
     a(href="#" class="bouton" hidden) Question Suivante

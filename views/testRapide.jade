@@ -4,13 +4,13 @@ block content
   section(class="maSection")
     h2 Question
     fieldset
-      p= question.question 
-      each reponse,index in question.reponses
-        div(class="radio")
-          label
-            input(type="radio" name="optionsRadios" id="optionsRadios#{index}" value="option#{index}") 
-            | #{reponse}
-
-    a(href="tableauDeBord" class="bouton") Abandonner
-    a(href="#" id="correction" class="bouton") Corriger
-    a(href="#" id="correction" class="bouton" hidden) Question Suivante
+      p= question.question
+      form(method="post")
+        each reponse,index in question.reponses
+          div(class="radio")
+            label
+              input(type="radio" name="optionsRadios" id="optionsRadios#{index}" value="#{index}") 
+              | #{reponse}
+        a(href="tableauDeBord" class="bouton") Abandonner
+        // a(href="#" id="correction" class="bouton") Corriger
+        input(type="submit" value="Question Suivante" id="correction" class="bouton")

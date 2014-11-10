@@ -18,13 +18,17 @@ var msgError="";
 var mesDomainesExamen=null;
 var nbQuestionsExamen=null;
 
+/*
+
+  Variables pour les tests rapides
+
+ */
+var maQuestion=null;
 /*    
 
   GET home page. 
 
 */
-
-
 router.get('/', function (req, res) {
   res.render('index', { title: 'WebQuiz' , JS: 'acceuil'});
 });
@@ -50,7 +54,7 @@ router.get('/tableauDeBord', function (req, res) {
 
 router.post('/tableauDeBord', function (req, res) {
   // contrôle saisie
-  
+  error=false;
   // controle si la case été coché
   if(typeof req.param('maCB') == 'undefined'){
     error = true;
@@ -102,7 +106,9 @@ router.get('/resultat', function (req, res) {
 
 */
 router.get('/examen', function (req, res) {
-  res.render('examen', { title: 'Examen' , JS: 'examen'});
+  console.log("yo");
+  maQuestion = db.getRandomQuestion(mesDomainesExamen);
+  res.render('examen', { title: 'Examen' , JS: 'examen', question: maQuestion});
 });
 
 
@@ -112,9 +118,15 @@ router.get('/examen', function (req, res) {
 
 */
 router.get('/testRapide', function (req, res) {
-  var maQuestion = db.getRandomQuestion();
-  console.log(maQuestion.reponses);
+  maQuestion = db.getRandomQuestion();
+  //console.log(maQuestion.reponses);
   res.render('testRapide', { title: 'Test Rapide' , JS: 'testRapide', question: maQuestion});
 });
+
+router.post('/testRapide', function (req, res) {
+  console.log(req.param('optionsRadios'));
+  res.redirect('/testRapide');
+});
+
 
 module.exports = router;
