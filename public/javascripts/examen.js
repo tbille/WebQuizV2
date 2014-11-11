@@ -6,8 +6,8 @@
 **/
 
 $(document).ready(function () {
-	
-}
+
+});
 
 // on click on correction
 $("#correction").click( function(){
@@ -54,7 +54,7 @@ $("#correction").click( function(){
 			$("#questionSuivante").show();
 		}
 		else{
-			$("finExam").show();
+			$("#finExam").show();
 		}
 	}
 
