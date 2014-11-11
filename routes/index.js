@@ -68,6 +68,11 @@ router.post('/tableauDeBord', function (req, res) {
     msgError = "Nombre de questions invalide.";
   }
 
+  //
+  if(!error && (req.param('nbQuestions')) > db.getNumQuestions(req.param('maCB') )){
+    error=true;
+    msgError = "Trôp de questions pour ce(s) domaine(s)";
+  }
   if(error){
       // je redirige en GET sur le tableau de bord s'il y a une erreur
     res.redirect('/tableauDeBord');

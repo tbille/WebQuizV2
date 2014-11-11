@@ -25,12 +25,3 @@ $( document ).ready(function() {
 		$("#examens").append("<li>Examen " + (i+1) +" ("+domaines.toUpperCase()+") :" +  examensFait[i].resultatExamen + "/20 </li>");	
 	};
 });
-
-/* Clear local Storage lorsque click sur bouton remise à zéro*/
-
-
-function reset_me(){
- localStorage.clear();
- window.location="tableauDeBord.html";
- 
-}
