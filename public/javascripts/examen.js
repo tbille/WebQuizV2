@@ -10,6 +10,8 @@
 var questionActuelle;
 // le tableau des question importé sur la page
 var monTableauQuestions;
+// nombre de questions reussi
+var nbQuestionsReussi;
 
 
 $(document).ready(function () {
@@ -26,13 +28,6 @@ $(document).ready(function () {
 }); 
 
 
-/*
-
-
-$(document).ready(function () {
-
-});
-
 */
 // on click on correction
 $("#correction").click( function(){
@@ -48,7 +43,9 @@ $("#correction").click( function(){
 				"margin-top": '1px',
 				"margin-bottom": '1px',
 			});
-		}
+		    
+          
+        }
 		else{
 			// ici je met le texte en vert pour la bonne réponse
 			  $("input:radio[name='optionsRadios']").each(function(){
@@ -76,6 +73,8 @@ $("#correction").click( function(){
 		$("#correction").hide();
 		
 		if($("#questionSuivante").length){
+            localStorage.setItem("nbQuestionsReussi", nbQuestionsReussi);
+			localStorage.setItem("nbQuestions",nbQuestions);
 			$("#questionSuivante").show();
 		}
 		else{
@@ -84,3 +83,5 @@ $("#correction").click( function(){
 	}
 
 });
+
+

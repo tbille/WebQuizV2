@@ -38,6 +38,12 @@ $(function(){
 
 });
 
+// Max nombre de questions dans menu déroulant en fonction des questions et domaines dans la BD
+    $("input[type='checkbox']").click(function() {
+        $("input[type='number']").attr("min", 1);
+        $("input[type='number']").attr("max", mesExamens.length);
+    });
+
 
 /* Clear local Storage lorsque click sur bouton remise à zéro*/
 
