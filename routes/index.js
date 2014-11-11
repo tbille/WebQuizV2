@@ -116,14 +116,19 @@ router.get('/resultat', function (req, res) {
 */
 router.get('/examen', function (req, res) {
 
+
   if(numQuestion <= db.getNumQuestions(mesDomainesExamen) && numQuestion<=nbQuestionsExamen){
     maQuestion = db.getRandomQuestion(mesDomainesExamen,questionsPasses);
     monDomaine = db.getNameDomaineFromID(maQuestion.domaine);
     questionsPasses.push(parseInt(maQuestion.id));
-    res.render('examen', { title: 'Examen' , JS: 'examen', question: maQuestion, numeroQuestion : numQuestion, domaine : monDomaine});
+    var finExam = false;
+    if(numQuestion==nbQuestionsExamen-1){
+      finExam = true;
+    }
+    res.render('examen', { title: 'Examen' , JS: 'examen', question: maQuestion, numeroQuestion : numQuestion, domaine : monDomaine, isFinExam : finExam});
   }
   else{
-    res.redirect('/tableauDeBord');
+    res.redirect('/resultat');
   }
 });
 
@@ -139,7 +144,6 @@ router.post('/examen', function (req, res) {
 */
 router.get('/testRapide', function (req, res) {
   maQuestion = db.getRandomQuestion();
-  //console.log(maQuestion.reponses);
   res.render('testRapide', { title: 'Test Rapide' , JS: 'testRapide', question: maQuestion});
 });
 

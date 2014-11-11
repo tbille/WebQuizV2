@@ -11,12 +11,9 @@ var questionActuelle;
 // le tableau des question importé sur la page
 var monTableauQuestions;
 
-/*
+
 $(document).ready(function () {
 	
-	alert(${question.bonneReponse});
-
-	/*
 	// initialisation à faire dans chaque fichier pour vérifier si les varibles en locales sont initialisée
 	if (!isInitialise()) {
 		initialiaseVariables();
@@ -24,48 +21,9 @@ $(document).ready(function () {
 	$("#CourantTestRapide").text(getCourantTestRapide());
 	$("#CumulTestRapide").text(getPourcentageTestRapide() + "%");
 	$("#CumulExamen").text(calculPourcentageExamen() + "%");
-	
-
-	// je met tous les examens dans le modal
-	var examensFait = getAllExams();
-	for (var i = 0; i < examensFait.length; i++) {
-		var domaines = "";
-		if(examensFait[i].tabId.length>1){
-			i=i;
-		}
-		for (var j = 0; j < examensFait[i].tabId.length; j++) {
-			if(!isNaN(examensFait[i].tabId[j])){
-				domaines = domaines.concat(getNameDomaineFromID(examensFait[i].tabId[j])+"/");
-			}
-		};
-		domaines = domaines.substring(0, domaines.length - 1);
-		$("#examens").append("<li>Examen " + (i+1) +" ("+domaines.toUpperCase()+") :" +  examensFait[i].resultatExamen + "/20 </li>");	
-	};
-
-	// je récupère toutes les questions en local
-	monTableauQuestions = getAllQuestions();
-
-	// Choix d'une question aléatoire
-	questionActuelle=Math.floor(Math.random() * ((monTableauQuestions.length-1) + 1) + 0);
-
-	var nomDomaine = getNameDomaineFromID(monTableauQuestions[questionActuelle].domaine);
-	$("#numQuestion").text("Question " + nomDomaine);
-
-	// affichage de la question
-	$("#question").text(monTableauQuestions[questionActuelle].question);
-
-	// parcours de toutes les réponses + affichage des réponses possibles
-	for(var j=0;j<monTableauQuestions[questionActuelle].reponses.length;j++){
-		$("#rep"+(j+1)).text('');
-		$("#rep"+(j+1)).text(monTableauQuestions[questionActuelle].reponses[j]);
-	}
-	// ici je uncheck tous les boutons radio
-	$("input:radio").attr("checked", false);
-
 
 }); 
 
-*/
 
 
 //test

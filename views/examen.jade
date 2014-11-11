@@ -13,7 +13,10 @@ block content
               | #{reponse}
         a(href="tableauDeBord" class="bouton") Abandonner
         a(href="#" id="correction" class="bouton") Corriger
-        input(type="submit" value="Question Suivante" id="questionSuivante" class="bouton" hidden)
-        a(href="#" class="bouton" hidden) Fin Questionnaire
+
+        if isFinExam=true
+          a(href="resultat" id="finExam" class="bouton" hidden) Fin Questionnaire
+        else
+          input(type="submit" value="Question Suivante" id="questionSuivante" class="bouton" hidden)
         
         div(class="reponse" hidden)=  question.bonneReponse

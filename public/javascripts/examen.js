@@ -5,6 +5,9 @@
 
 **/
 
+$(document).ready(function () {
+	
+}
 
 // on click on correction
 $("#correction").click( function(){
@@ -46,7 +49,13 @@ $("#correction").click( function(){
 		
 		// je cache le bouton de correction et j'affiche la question suivante
 		$("#correction").hide();
-		$("#questionSuivante").show();
+		
+		if($("#questionSuivante").length){
+			$("#questionSuivante").show();
+		}
+		else{
+			$("finExam").show();
+		}
 	}
 
 });
