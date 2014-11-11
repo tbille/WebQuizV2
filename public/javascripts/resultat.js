@@ -13,7 +13,7 @@ $( document ).ready(function() {
 		initialiaseVariables();
 	}
 	
-//	$("#CumulTestRapide").text(getPourcentageTestRapide() + "%");
+	$("#CumulTestRapide").text(getPourcentageTestRapide() + "%");
 	$("#CumulExamen").text(calculPourcentageExamen() + "%");
 	$("#note").text(localStorage.getItem("noteCourante") + $("#note").text());
 
@@ -37,7 +37,7 @@ $( document ).ready(function() {
 	    $("#messageResultat").text("Faites un peu plus d'effort!" );
 	} 
 
-	else if (15 <= notemsg && notemsg < 20) {
+	else if (15 <= notemsg && notemsg <= 20) {
 	    $("#messageResultat").text("C'est très bien!" );
 	} 
 

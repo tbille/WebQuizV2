@@ -18,7 +18,6 @@ $(document).ready(function () {
 	if (!isInitialise()) {
 		initialiaseVariables();
 	}
-	$("#CourantTestRapide").text(getCourantTestRapide());
 	$("#CumulTestRapide").text(getPourcentageTestRapide() + "%");
 	$("#CumulExamen").text(calculPourcentageExamen() + "%");
 
