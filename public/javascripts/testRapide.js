@@ -131,7 +131,8 @@ $("#correction").click( function(){
 
 /*
 
-/* on click on Question Suivante */
+/* 
+/* on click on Question Suivante 
 $("#questionSuivante").click( function(){
 	// récuperation d'un numéro aléatoire pour la question
 	questionActuelle=Math.floor(Math.random() * ((monTableauQuestions.length-1) + 1) + 0);
@@ -158,6 +159,7 @@ $("#questionSuivante").click( function(){
 	$("#questionSuivante").hide();
 });
 
+*/
 
 /* Clear local Storage lorsque click sur bouton remise à zéro*/
 function reset_me(){
