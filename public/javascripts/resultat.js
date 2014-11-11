@@ -10,12 +10,11 @@
 $( document ).ready(function() {
 	// initialisation à faire dans chaque fichier pour vérifier si les varibles en locales sont initialisée
 	
-	/*
 	if(!isInitialise()){
 		initialiaseVariables();
 	}
-	*/
-	$("#CumulTestRapide").text(getPourcentageTestRapide() + "%");
+	
+//	$("#CumulTestRapide").text(getPourcentageTestRapide() + "%");
 	$("#CumulExamen").text(calculPourcentageExamen() + "%");
 
 	// je met tous les examens dans le modal

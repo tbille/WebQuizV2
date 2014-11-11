@@ -5,7 +5,15 @@ if title != "WebQuiz"
         li 
   aside(class= "stats")
     h1 Statistiques
-      if title == "Mon tableau de bord"
+      if title == "Examen"
+        section
+          h2 Note cumulative de l'examen
+          p(id= "CourantExamen") 
+      else if title == "Test Rapide"    
+        section
+          h2 Note courante du test rapide
+          p(id= "CourantTestRapide")
+      else 
         section
           h2 Note cumulative du test rapide
           p(id= "CumulTestRapide") 
@@ -13,12 +21,4 @@ if title != "WebQuiz"
           h2 Note moyenne de l'examen
           p(id= "CumulExamen")
         p: a(href="#lightbox", class="bouton") Voir détails
-        p: button(id= "reset_it") Remise à zéro  
-      else if title == "Test Rapide"    
-        section
-          h2 Note courante du test rapide
-          p(id= "CourantTestRapide")
-      else 
-        section
-          h2 Note cumulative de l'examen
-          p(id= "CourantExamen")
+        p: button(id= "reset_it") Remise à zéro 

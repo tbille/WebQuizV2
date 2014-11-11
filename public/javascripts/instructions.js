@@ -31,6 +31,4 @@ $( document ).ready(function() {
 
 function reset_me(){
  localStorage.clear();
- window.location="tableauDeBord.html";
- 
 }
