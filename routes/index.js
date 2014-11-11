@@ -116,7 +116,7 @@ router.get('/resultat', function (req, res) {
 */
 router.get('/examen', function (req, res) {
 
-  if(numQuestion <= db.getNumQuestions(mesDomainesExamen)){
+  if(numQuestion <= db.getNumQuestions(mesDomainesExamen) && numQuestion<=nbQuestionsExamen){
     maQuestion = db.getRandomQuestion(mesDomainesExamen,questionsPasses);
     monDomaine = db.getNameDomaineFromID(maQuestion.domaine);
     questionsPasses.push(parseInt(maQuestion.id));
