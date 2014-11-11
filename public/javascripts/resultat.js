@@ -19,11 +19,15 @@ $( document ).ready(function() {
 
 	localStorage.removeItem("noteCourante");
 
+	var mesdomaines = $(".mesDomaines").text();
+	mesdomaines = mesdomaines.split(',');
+
 //Message selon resultat obtenu sur 20
 	var data = $("#note").text();
 	var arr = data.split('/');
 	var notemsg = parseInt(parseInt(arr[0])*(20/parseInt(arr[1])));
 
+	ajouteExamen(notemsg,mesdomaines);
 
 	if (0 <= notemsg && notemsg < 5) {
 	    $("#messageResultat").text("Vous êtes pourri!" );
@@ -41,4 +45,16 @@ $( document ).ready(function() {
 	    $("#messageResultat").text("C'est très bien!" );
 	} 
 
+
+	// je met tous les examens dans le modal
+	var examensFait = getAllExams();
+	for (var i = 0; i < examensFait.length; i++) {
+		var domaines = "";
+
+		for (var j = 0; j < examensFait[i].tabId.length; j++) {
+				domaines = domaines.concat(examensFait[i].tabId[j]+"/");
+		};
+		domaines = domaines.substring(0, domaines.length - 1);
+		$("#examens").append("<li>Examen " + (i+1) +" ("+domaines.toUpperCase()+") :" +  examensFait[i].resultatExamen + "/20 </li>");	
+	};
 });

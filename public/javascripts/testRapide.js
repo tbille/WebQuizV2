@@ -5,13 +5,6 @@
 
 **/
 
-
-// variable qui donne ma question
-var questionActuelle;
-// le tableau des question importé sur la page
-var monTableauQuestions;
-
-
 $(document).ready(function () {
 	
 	// initialisation à faire dans chaque fichier pour vérifier si les varibles en locales sont initialisée
@@ -86,46 +79,5 @@ $("#correction").click( function(){
 	}
 });
 
-/*
-
-/* 
-/* on click on Question Suivante 
-$("#questionSuivante").click( function(){
-	// récuperation d'un numéro aléatoire pour la question
-	questionActuelle=Math.floor(Math.random() * ((monTableauQuestions.length-1) + 1) + 0);
-	if(questionActuelle<monTableauQuestions.length){
-		var nomDomaine = getNameDomaineFromID(monTableauQuestions[questionActuelle].domaine);
-		$("#numQuestion").text("Question " + nomDomaine);
-		// affichage de la question
-		$("#question").text(monTableauQuestions[questionActuelle].question);
-
-		// parcours de toutes les questions + affichage
-		for(var j=0;j<monTableauQuestions[questionActuelle].reponses.length;j++){
-			$("#rep"+(j+1)).text('');
-			$("#rep"+(j+1)).text(monTableauQuestions[questionActuelle].reponses[j]);
-		}
-	}
-
-	// ici j'enlève le style si l'utilisateur a corrigé auparavant
-	$("input:radio").attr("checked", false);
-	$("input:radio[name='r1']").each(function(){
-		$(this).parent().removeAttr('style');
-  	});
-
-  	$("#correction").show();
-	$("#questionSuivante").hide();
-});
-
-*/
-
-// Si c'est la bonne réponse
-/*
-$(question.bonneReponse)
-
-div(class="reponse" hidden) ${ question.bonneReponse }  */
-
-
-		
-		
 
 		

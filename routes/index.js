@@ -110,7 +110,12 @@ router.get('/instructions', function (req, res) {
 
 */
 router.get('/resultat', function (req, res) {
-  res.render('resultat', { title: 'Resultat' , JS: 'resultat', nbQuestions : nbQuestionsExamen});
+  var mesNomsDomaines = [];
+  for (var i = 0; i < mesDomainesExamen.length; i++) {
+    mesNomsDomaines.push(db.getNameDomaineFromID(mesDomainesExamen[i]))
+  };
+
+  res.render('resultat', { title: 'Resultat' , JS: 'resultat', nbQuestions : nbQuestionsExamen, tableauDomaines: mesNomsDomaines });
 });
 
 
