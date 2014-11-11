@@ -97,6 +97,23 @@ var getCourantTestRapide = function() {
 }
 
 
+/*Calcul de la note courante Examen */
+var calculPourcentageExamen = function(){
+	var mesExamens = getObjectInLS("tabExamen");
+	var somme = 0;
+	for (var i = 0; i < mesExamens.length; i++) {
+		somme += mesExamens[i].resultatExamen;
+	};
+
+	if(mesExamens.length == 0 ){
+		return 0;
+	}
+	else{
+		return  (somme + '/' + 'mesExamens.length');
+	}
+}
+
+
 /**
 
 EXAMEN

@@ -5,10 +5,35 @@
 
 **/
 
+
+// variable qui donne ma question
+var questionActuelle;
+// le tableau des question importé sur la page
+var monTableauQuestions;
+
+
+$(document).ready(function () {
+	
+	// initialisation à faire dans chaque fichier pour vérifier si les varibles en locales sont initialisée
+	if (!isInitialise()) {
+		initialiaseVariables();
+	}
+	$("#CourantTestRapide").text(getCourantTestRapide());
+    $("#CourantExamen").text(getCourantExamen());
+	$("#CumulTestRapide").text(getPourcentageTestRapide() + "%");
+	$("#CumulExamen").text(calculPourcentageExamen() + "%");
+
+}); 
+
+
+/*
+
+
 $(document).ready(function () {
 	
 }
 
+*/
 // on click on correction
 $("#correction").click( function(){
 	if($("input:radio[name='optionsRadios']").is(":checked")){ 
