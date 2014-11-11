@@ -110,7 +110,7 @@ router.get('/instructions', function (req, res) {
 
 */
 router.get('/resultat', function (req, res) {
-  res.render('resultat', { title: 'Resultat' , JS: 'resultat'});
+  res.render('resultat', { title: 'Resultat' , JS: 'resultat', nbQuestions : nbQuestionsExamen});
 });
 
 
@@ -127,10 +127,10 @@ router.get('/examen', function (req, res) {
     monDomaine = db.getNameDomaineFromID(maQuestion.domaine);
     questionsPasses.push(parseInt(maQuestion.id));
     var finExam = false;
-    if(numQuestion==(nbQuestionsExamen-1)){
+    if(numQuestion==(nbQuestionsExamen)){
       finExam = true;
     }
-    res.render('examen', { title: 'Examen' , JS: 'examen', question: maQuestion, numeroQuestion : numQuestion, domaine : monDomaine, isFinExam : finExam});
+    res.render('examen', { title: 'Examen' , JS: 'examen', question: maQuestion, numeroQuestion : numQuestion, domaine : monDomaine, isFinExam : finExam, nbQuestions : nbQuestionsExamen});
   }
   else{
     res.redirect('/resultat');

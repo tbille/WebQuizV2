@@ -6,12 +6,6 @@
 **/
 
 
-// variable qui donne ma question
-var questionActuelle;
-// le tableau des question importé sur la page
-var monTableauQuestions;
-// nombre de questions reussi
-var nbQuestionsReussi;
 
 
 $(document).ready(function () {
@@ -20,15 +14,17 @@ $(document).ready(function () {
 	if (!isInitialise()) {
 		initialiaseVariables();
 	}
+
+	if(localStorage.getItem("noteCourante")==null){
+		localStorage.setItem("noteCourante",0);
+	}
 	$("#CourantTestRapide").text(getCourantTestRapide());
-    $("#CourantExamen").text(getCourantExamen());
+  $("#CourantExamen").text(localStorage.getItem("noteCourante") + $("#CourantExamen").text());
 	$("#CumulTestRapide").text(getPourcentageTestRapide() + "%");
 	$("#CumulExamen").text(calculPourcentageExamen() + "%");
 
 }); 
 
-
-*/
 // on click on correction
 $("#correction").click( function(){
 	if($("input:radio[name='optionsRadios']").is(":checked")){ 
@@ -43,9 +39,10 @@ $("#correction").click( function(){
 				"margin-top": '1px',
 				"margin-bottom": '1px',
 			});
-		    
+		  
+		  localStorage.setItem("noteCourante",parseInt(localStorage.getItem("noteCourante"))+1);  
           
-        }
+    }
 		else{
 			// ici je met le texte en vert pour la bonne réponse
 			  $("input:radio[name='optionsRadios']").each(function(){
@@ -73,8 +70,6 @@ $("#correction").click( function(){
 		$("#correction").hide();
 		
 		if($("#questionSuivante").length){
-            localStorage.setItem("nbQuestionsReussi", nbQuestionsReussi);
-			localStorage.setItem("nbQuestions",nbQuestions);
 			$("#questionSuivante").show();
 		}
 		else{
