@@ -12,8 +12,8 @@ block content
               input(type="radio" name="optionsRadios" id="optionsRadios#{index}" value="#{index}") 
               | #{reponse}
         a(href="tableauDeBord" class="bouton") Abandonner
-        // a(href="#" id="correction" class="bouton") Corriger
-        input(type="submit" value="Question Suivante" id="correction" class="bouton")
+        a(href="#" id="correction" class="bouton") Corriger
+        input(type="submit" value="Question Suivante" id="questionSuivante" class="bouton" hidden)
         a(href="#" class="bouton" hidden) Fin Questionnaire
         
         div(class="reponse" hidden)=  question.bonneReponse

@@ -44,7 +44,6 @@ $("#correction").click( function(){
 			});
 		}
 		
-
 		// je cache le bouton de correction et j'affiche la question suivante
 		$("#correction").hide();
 		$("#questionSuivante").show();
