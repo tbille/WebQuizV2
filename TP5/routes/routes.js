@@ -42,4 +42,8 @@ router.get('/instruction', function(req, res) {
     res.render('instruction');
 });
 
+router.get('/ajouterQuestion', function(req, res) {
+    res.render('ajouterQuestion');
+});
+
 module.exports = router;
