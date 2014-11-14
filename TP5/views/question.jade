@@ -1,0 +1,45 @@
+extends layout
+
+block stylesheet
+    link(rel="stylesheet", href="/stylesheets/question.css")
+    script(type="text/javascript" src="/javascripts/utility.js")
+
+    if(type === "Test")
+        script(type="text/javascript").
+            var correctAnswer = !{qa.correctAnswer};
+        script(type="text/javascript" src="/javascripts/question.js")
+    else if (type === "Exam")
+        script(type="text/javascript").
+            var correctAnswer = !{qa.correctAnswer};
+            var questionIDs = [#{ids}];
+        script(type="text/javascript" src="/javascripts/questionExam.js")
+
+block content
+    section#main
+        h1= title
+        section
+            h2  Domaine: 
+                span#domain= qa.domain
+            p
+                i Question: 
+                span#question= qa.question
+            fieldset
+                each answer, i in qa.answers
+                    label(for= i+1)
+                        input(type="radio" name="answer" value= (i+1))
+                        = answer
+
+            if(type === "Test")
+                a.button(href="/tableauBord") Retour au menu
+            else if (type == "Exam")
+                a.button.abandon(href="/examenTermine") Abandonner
+
+            a.button.correct Corriger
+
+        aside
+            h2 Statistiques
+            p Note courante :
+            p   
+                span#goodAnswers 0 
+                |/ 
+                span#totalAnswers 0

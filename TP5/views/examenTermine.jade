@@ -1,0 +1,23 @@
+extends layout
+
+block stylesheet
+    link(rel="stylesheet", href="/stylesheets/examenTermine.css")
+    script(type="text/javascript").
+        var domains = !{domains};
+    script(type="text/javascript" src="/javascripts/examenTermine.js")
+
+block content
+    section
+        h1 Examen Terminé!
+
+        p#message
+            span Message de fin à l'étudiant...
+            span#goodAnswers 0 
+            |/ 
+            span#totalAnswers 0
+
+        p.
+            Si vous n'êtes pas satisfait de vos connaissances, n'oubliez pas de 
+            vous pratiquer à l'aide des tests rapides.
+
+        a.button(href="/tableauBord") Retour au menu

@@ -1,0 +1,26 @@
+doctype html
+html
+    head
+        title="Questionneur"
+        link(rel="stylesheet", href="/stylesheets/globale.css")
+        script(type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js")
+        block stylesheet
+    body
+        div#container
+            header
+                a(href="/")
+                    img(src="/images/questionneur.png")
+                nav
+                    ul
+                        li
+                            a#accueil(href="/") Accueil
+                        li
+                            a#tableauBord(href="/tableauBord") Tableau de bord
+                        li
+                            a#instruction(href="/instruction") Instructions
+            
+            block content
+
+            footer
+                p © 2014 Questionneur sur les notions de Web
+                p TP4 LOG4420 par Konstantinos Lambrou-Latreille
