@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var db = require ('./lib/db');
-
+var ajouterQuestion = require('./models/question.js');
 var routes = require('./routes/routes');
 
 var app = express();
