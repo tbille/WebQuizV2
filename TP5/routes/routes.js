@@ -1,9 +1,10 @@
 var express = require('express');
 var router = express.Router();
-var db = require('../lib/db');
+var questions = require('../models/question');
 
 /* GET home page. */
 router.get('/', function(req, res) {
+    questions.ajouterToutesLesQuestions();
     res.render('accueil');
 });
 
