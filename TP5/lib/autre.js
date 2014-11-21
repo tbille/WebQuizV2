@@ -1,36 +1,78 @@
-var db = require ('../lib/db');
+var mongoose = require( 'mongoose' );
+var Schema   = mongoose.Schema;
+ 
+module.exports.mongoose = mongoose;
+module.exports.Schema = Schema;
 
-var QuestionSchema = new db.Schema({
-    domain : String,
-    question: String,
-    correctAnswer: Number,
-    answers: [String]
-})
+// Connect to cloud database
+var username = "webquizdb"
+var password = "webquizdb";
+var address = '@ds053140.mongolab.com:53140/webquizdb';
+connect();
 
-var MaQuestion = db.mongoose.model('Questions', QuestionSchema);
+// Connect to mongo
+function connect() {
+  var url = 'mongodb://' + username + ':' + password + address;
+  mongoose.connect(url);
+}
+function disconnect() {mongoose.disconnect()}
+  
 
-// Exports
-module.exports.ajouterQuestion = ajouterQuestion;
-module.exports.ajouterToutesLesQuestions = ajouterToutesLesQuestions;
-
-// Add question to database
-function ajouterQuestion( domain, question, correctAnswer, Answers, callback) {
-  var instance = new MaQuestion();
-  instance.domain = domain;
-  instance.question = question;
-  instance.correctAnswer = correctAnswer ;
-  instance.answers = Answers;
-  instance.save(function (err) {
-    if (err) {
-      callback(err);
+// Exportations
+module.exports = {
+    getQuestionById: function(id) {
+        return questions[id - 1];
+    },
+    getRandomQuestion: function() {
+        var chosenQuestionNum = generateRandom(0, questions.length);
+        return questions[chosenQuestionNum];
+    },
+    // Cette fonction choisit numQuestions nombre de questions selon la liste d'IDs 
+    // de question questionIDs.
+    getRandomIDs: function(domains, num) {
+        var ids = [];
+        while (ids.length < num) {
+            var question = questions[generateRandom(0, questions.length)];
+            if (domains.inArray(question.domain)) {
+                ids.push(question.id);
+                ids = unique(ids);
+            }
+        }
+        return ids;
     }
-    else {
-      callback(null, instance);
-    }
-  });
 }
 
+/*
+Retourne un chiffre entier aléatoire entre min inclusivement et max exclusivement.
+*/
+function generateRandom(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+}
 
+// Élimine les doublons d'une liste / tableau.
+function unique(list) {
+    var result = [];
+    for (i = 0; i < list.length; i++) {
+        if (!result.inArray(list[i])) {
+            result.push(list[i]);
+        }
+    }
+    return result;
+}
+
+Array.prototype.inArray = function(value) {
+    // Returns true if the passed value is found in the
+    // array. Returns false if it is not.
+    var i;
+    for (i = 0; i < this.length; i++) {
+        if (this[i] == value) {
+            return true;
+        }
+    }
+    return false;
+};
+
+// Mini base de données qui contient l'ensemble des questions
 questions = [
     { id: 1,
       domain: "HTML", 
@@ -103,21 +145,11 @@ questions = [
       question: "À quoi sert le langage CSS ?",
       correctAnswer: 2,
       answers: ["À réaliser des pages dynamiques", "À ajouter du style aux documents web", "À insérer du contenu dans une page internet"]
+    },
+    { id: 13,
+      domain: "",
+      question: "",
+      correctAnswer: 0,
+      answers: []
     }
 ];
-
-function ajouterToutesLesQuestions(){
-  for (var i = 0; i < questions.length; i++) {
-    //domain, question, correctAnswer, Answers, callback
-    ajouterQuestion(questions[i].domain,questions[i].question,questions[i].correctAnswer,questions[i].answers, function(){
-      console.log("Questions Ajoutés");
-    });
-  };
-}
-
-/*
-Retourne un chiffre entier aléatoire entre min inclusivement et max exclusivement.
-*/
-function generateRandom(min, max) {
-    return Math.floor(Math.random() * (max - min)) + min;
-}
