@@ -1,16 +1,14 @@
-/*
 
 var db = require('../lib/db');
 
 var QuestionSchema = new db.Schema({
-    id : {type: String, unique: true}, 
     domain : String,
     question: String,
     correctAnswer: Number,
-    answers: Array
+    answers: [String]
 })
 
-var MaQuestion = db.mongoose.model('ajouterQuestion', QuestionSchema);
+var MaQuestion = db.mongoose.model('Questions', QuestionSchema);
 
 // Exports
 module.exports.ajouterQuestion = ajouterQuestion;
@@ -18,7 +16,6 @@ module.exports.ajouterQuestion = ajouterQuestion;
 // Add question to database
 function ajouterQuestion(id, domain, question, correctAnswer, Answers, callback) {
   var instance = new MaQuestion();
-  instance.id = id;
   instance.domain = domain;
   instance.question = question;
   instance.correctAnswer = correctAnswer ;
@@ -32,5 +29,3 @@ function ajouterQuestion(id, domain, question, correctAnswer, Answers, callback)
     }
   });
 }
-
-*/
