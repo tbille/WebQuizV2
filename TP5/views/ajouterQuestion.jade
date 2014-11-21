@@ -2,7 +2,8 @@ extends layout
 
 block stylesheet
     link(rel="stylesheet", href="/stylesheets/instruction.css")
-    // script(type="text/javascript" src="/javascripts/instruction.js")
+    script(type="text/javascript" src="/javascripts/ajouterQuestion.js")
+
 
 block content
     section
@@ -13,12 +14,13 @@ block content
           input(type="text" placeholder="Enter Question" required)
         section
           h2 Réponses
-          - var n = 1
+          div(class="allReponses")
+            - var n = 1
             while n < 4
               div
-                input(type="text" placeholder="Réponse #{n++}" required)
-                input(type="radio" name="answer")
+              input(type="text" placeholder="Réponse #{n++}" required)
+              input(type="radio" name="answer")
 
-          a(class="ajouterReponse") Ajouter une réponse
+          a(href="#" class="ajouterReponse") Ajouter une réponse
 
           input(type="submit" value="Ajouter Question")
