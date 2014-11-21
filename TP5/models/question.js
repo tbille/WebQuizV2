@@ -1,3 +1,5 @@
+/*
+
 var db = require('../lib/db');
 
 var QuestionSchema = new db.Schema({
@@ -30,3 +32,5 @@ function ajouterQuestion(id, domain, question, correctAnswer, Answers, callback)
     }
   });
 }
+
+*/
