@@ -4,7 +4,6 @@ $(document).ready(function() {
         var n = 3;
   
         $('.ajouterReponse').click(function() {
-        //var n=99;         
         $(scntDiv).append("<div><input type=text placeholder='Réponse "+ ++n +" '/><input type=radio name=answer/></div>");      
           
         });
