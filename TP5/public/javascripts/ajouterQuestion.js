@@ -26,14 +26,6 @@ $(document).ready(function() {
         });
         */ 
 
-  //Valider si le domaine inscrit est HTML CSS ou JavaScript
-    $("input[type='submit']").click(function() {
-        var selectedDomain = $('#selectedDomain').val();
-        alert(selectedDomain);
-      
-      /*  if(selectedDomain == "HTML" || selectedDomain == "CSS") {
-         
-        }*/
        
     });
         
