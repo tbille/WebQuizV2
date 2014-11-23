@@ -11,7 +11,7 @@ block stylesheet
     else if (type === "Exam")
         script(type="text/javascript").
             var correctAnswer = !{qa.correctAnswer};
-            //var questionIDs = [#{ids}];
+            var questionIDs = "#{ids}".split(',');
         script(type="text/javascript" src="/javascripts/questionExam.js")
 
 block content
