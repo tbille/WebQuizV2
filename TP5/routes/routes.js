@@ -4,9 +4,11 @@ var Questions = require('../models/question');
 
 /* GET home page. */
 router.get('/', function(req, res) {
+ //Questions.ajouterToutesLesQuestions();
 
+//    Questions.getRandomQuestion(function(element){ console.log(element);});
 
-    questions.getRandomQuestion(function(element){ console.log(element);});
+     Questions.getRandomIDs(["HTML","CSS"], 2, function(element){console.log(element);});
 
     res.render('accueil');
 });

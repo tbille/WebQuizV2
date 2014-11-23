@@ -14,7 +14,6 @@ var MaQuestion = db.mongoose.model('Questions', QuestionSchema);
 
 // Exports
 module.exports.ajouterQuestion = ajouterQuestion;
-module.exports.ajouterToutesLesQuestions = ajouterToutesLesQuestions;
 
 // Add question to database
 function ajouterQuestion( domain, question, correctAnswer, answers, callback) {
@@ -111,14 +110,7 @@ questions = [
     }
 ];
 
-function ajouterToutesLesQuestions(){
-  for (var i = 0; i < questions.length; i++) {
-    //domain, question, correctAnswer, Answers, callback
-    ajouterQuestion(questions[i].domain,questions[i].question,questions[i].correctAnswer,questions[i].answers, function(){
-      console.log("Questions Ajoutées");
-    });
-  };
-}
+
 
 
 
@@ -132,14 +124,24 @@ function generateRandom(min, max) {
 
 // Exportations
 module.exports = {
+
+
+    ajouterToutesLesQuestions: function(){
+      for (var i = 0; i < questions.length; i++) {
+        //domain, question, correctAnswer, Answers, callback
+          ajouterQuestion(questions[i].domain,questions[i].question,questions[i].correctAnswer,questions[i].answers, function(){
+        });  
+      };
+      console.log("Questions Ajoutées");
+    },
+
     getQuestionById: function(id) {
         var instance = new MaQuestion();
         return instance.find( { _id: id } )
     },
 
     getRandomQuestion: function(callback) {
-
-     MaQuestion.findOneRandom(function(err, element) {
+      MaQuestion.findOneRandom(function(err, element) {
                                       if (err) console.log(err);
                                       else callback(element);
                                     });
@@ -148,16 +150,19 @@ module.exports = {
     
     // Cette fonction choisit numQuestions nombre de questions selon la liste d'IDs 
     // de question questionIDs.
-    getRandomIDs: function(domains, num) {
-        var ids = [];
-        while (ids.length < num) {
-            var question = questions[generateRandom(0, questions.length)];
-            if (domains.inArray(question.domain)) {
-                ids.push(question.id);
-                ids = unique(ids);
-            }
-        }
-        return ids;
+    getRandomIDs: function(domains, num, callback) {
+
+      //for (var i = 0; i < domains.length; i++) {
+        MaQuestion.find({ domain : { $in : domains }  }, function(err, myResults){
+                                        if (err) console.log(err);
+                                        else {
+                                          var arr=[];
+                                          for (var i = 0; i < num; i++) {
+                                            arr.push(myResults[i]);                                       
+                                          };
+                                          callback(arr);
+                                        } }) ;
+      //};
     }
 }
 
