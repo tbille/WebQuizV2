@@ -135,9 +135,11 @@ module.exports = {
       console.log("Questions Ajoutées");
     },
 
-    getQuestionById: function(id) {
-        var instance = new MaQuestion();
-        return instance.find( { _id: id } )
+    getQuestionById: function(id, callback) {
+        MaQuestion.find({_id: id}, function(err,res){
+          if(err) console.log(err);
+          else callback(res[0]);
+        })
     },
 
     getRandomQuestion: function(callback) {
@@ -158,7 +160,7 @@ module.exports = {
                                         else {
                                           var arr=[];
                                           for (var i = 0; i < num; i++) {
-                                            arr.push(myResults[i]);                                       
+                                            arr.push(myResults[i]["_id"]);                                       
                                           };
                                           callback(arr);
                                         } }) ;
