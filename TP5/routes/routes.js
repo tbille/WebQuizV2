@@ -72,7 +72,7 @@ router.get('/ajouterQuestion', function(req, res) {
 });*/
 
 router.post('/ajouterToutesQuestions', function(req, res) {
-  var domain = req.body.domain;
+  var domain = req.value.domain;
   var question = req.body.question;
   var correctAnswer = req.body.correctAnswer;
   var answers = req.body.answers;
