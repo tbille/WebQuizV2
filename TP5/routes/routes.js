@@ -4,7 +4,8 @@ var questions = require('../models/question');
 
 /* GET home page. */
 router.get('/', function(req, res) {
-    questions.ajouterToutesLesQuestions();
+
+    questions.getRandomQuestion(function(element){ console.log(element);});
     res.render('accueil');
 });
 
