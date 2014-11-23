@@ -6,9 +6,10 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var db = require ('./lib/db');
-var ajouterQuestion = require('./models/question.js');
 var routes = require('./routes/routes');
 
+//integrate question model
+var Questions = require('./models/question.js')
 var app = express();
 
 // view engine setup
@@ -56,6 +57,8 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
+
+
 
 
 module.exports = app;

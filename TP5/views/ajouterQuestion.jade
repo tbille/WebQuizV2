@@ -4,26 +4,28 @@ block stylesheet
     link(rel="stylesheet", href="/stylesheets/ajouterQuestion.css")
     link(rel="stylesheet", href="/stylesheets/globale.css")
 
-
+    script(type="text/javascript" src="/javascripts/ajouterQuestion.js")
+    
 block content
     section(class="center")
       h1 Ajouter une question
-      form
+      form(action="/ajouterToutesQuestions" method="post")
+        section
+          h2 Domaine
+          input(type="text" placeholder="Entrez le domaine" name="domain" required)
         section
           h2 Question
-          input(type="text" placeholder="Enter Question" required)
+          input(type="text" placeholder="Entrez la question" name="question" required)
         section
           h2 Réponses
           div(class="allReponses")
             - var n = 1
             while n < 4
               div
-              input(type="text" placeholder="Réponse #{n++}" required)
-              input(type="radio" name="answer")
+              input(type="text" placeholder="Réponse #{n++}" name="answers" required)
+              input(type="radio" name="correctAnswer")
 
           a(href="#" class="ajouterReponse") Ajouter une réponse
 
-      div(id="submitQuestion")
         input(type="submit" value="Ajouter la question" class="button")
           
-    script(type="text/javascript" src="/javascripts/ajouterQuestion.js")

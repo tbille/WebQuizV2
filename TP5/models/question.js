@@ -9,17 +9,19 @@ var QuestionSchema = new db.Schema({
 
 var MaQuestion = db.mongoose.model('Questions', QuestionSchema);
 
+
 // Exports
 module.exports.ajouterQuestion = ajouterQuestion;
 module.exports.ajouterToutesLesQuestions = ajouterToutesLesQuestions;
 
 // Add question to database
-function ajouterQuestion( domain, question, correctAnswer, Answers, callback) {
+function ajouterQuestion( domain, question, correctAnswer, answers, callback) {
+  console.log("in add");
   var instance = new MaQuestion();
   instance.domain = domain;
   instance.question = question;
   instance.correctAnswer = correctAnswer ;
-  instance.answers = Answers;
+  instance.answers = answers;
   instance.save(function (err) {
     if (err) {
       callback(err);
@@ -30,6 +32,7 @@ function ajouterQuestion( domain, question, correctAnswer, Answers, callback) {
   });
 }
 
+ 
 
 questions = [
     { id: 1,
@@ -110,7 +113,7 @@ function ajouterToutesLesQuestions(){
   for (var i = 0; i < questions.length; i++) {
     //domain, question, correctAnswer, Answers, callback
     ajouterQuestion(questions[i].domain,questions[i].question,questions[i].correctAnswer,questions[i].answers, function(){
-      console.log("Questions Ajoutés");
+      console.log("Questions Ajoutées");
     });
   };
 }
