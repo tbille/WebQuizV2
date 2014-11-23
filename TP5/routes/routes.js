@@ -1,17 +1,19 @@
 var express = require('express');
 var router = express.Router();
-var questions = require('../models/question');
+var Questions = require('../models/question');
 
 /* GET home page. */
 router.get('/', function(req, res) {
 
+
     questions.getRandomQuestion(function(element){ console.log(element);});
+
     res.render('accueil');
 });
 
 router.get('/tableauBord', function(req, res) {
     res.render('tableauBord');
-});
+}); 
 
 router.get('/question', function(req, res) {
     var qa = db.getRandomQuestion();
@@ -47,5 +49,24 @@ router.get('/instruction', function(req, res) {
 router.get('/ajouterQuestion', function(req, res) {
     res.render('ajouterQuestion');
 });
+
+/* Lorsqu'on clique sur le bouton "Ajouter la question" de la page ajouterQuestion, les données vont être postés à '/ajouterToutesQuestions' */
+/*router.get('/ajouterToutesQuestions', function(req, res) {
+    res.render('ajouterToutesQuestions');
+});*/
+
+router.post('/ajouterToutesQuestions', function(req, res) {
+  var domain = req.body.domain;
+  var question = req.body.question;
+  var correctAnswer = req.body.correctAnswer;
+  var answers = req.body.answers;
+  
+console.log("before call");
+Questions.ajouterQuestion(domain, question, correctAnswer, answers, function(err) {
+    if (err) throw err; 
+    res.redirect('/ajouterQuestion');
+  });  
+});
+
 
 module.exports = router;

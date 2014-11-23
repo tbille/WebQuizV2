@@ -1,24 +1,34 @@
 extends layout
 
 block stylesheet
-    link(rel="stylesheet", href="/stylesheets/instruction.css")
-    // script(type="text/javascript" src="/javascripts/instruction.js")
+    link(rel="stylesheet", href="/stylesheets/ajouterQuestion.css")
+    link(rel="stylesheet", href="/stylesheets/globale.css")
 
+    script(type="text/javascript" src="/javascripts/ajouterQuestion.js")
+    
 block content
-    section
+    section(class="center")
       h1 Ajouter une question
-      form
+      form(action="/ajouterToutesQuestions" method="post")
+        section
+          h2 Domaine
+          input(type="text" placeholder="HTML, CSS ou JavaScript" name="domain" size="63" required)
         section
           h2 Question
-          input(type="text" placeholder="Enter Question" required)
+          input(type="text" placeholder="Entrez la question" name="question" size="63" required)
         section
           h2 Réponses
-          - var n = 1
+          div(class="allReponses")
+            - var n = 1
             while n < 4
               div
-                input(type="text" placeholder="Réponse #{n++}" required)
-                input(type="radio" name="answer")
+                input(type="text" placeholder="Réponse no. #{n++}" name="answers" size="63" required)
+              //input(type="radio" name="correctAnswer")
+          a(href="#" class="ajouterReponse") Ajouter une réponse
+          
+        section
+          h2 Bonne réponse
+          input(type="number" placeholder="No. de la bonne réponse" name="correctAnswer" required)
 
-          a(class="ajouterReponse") Ajouter une réponse
-
-          input(type="submit" value="Ajouter Question")
+        input(type="submit" value="Ajouter la question" class="button")
+          
