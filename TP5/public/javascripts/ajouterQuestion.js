@@ -29,9 +29,7 @@ $(document).ready(function() {
        
     });
         
-        
-
-});
+      
 
 
 
