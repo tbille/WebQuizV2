@@ -156,7 +156,7 @@ input[type="submit"]::-moz-focus-inner {
     text-align:center;
     text-shadow:1px 1px 0px #cc9f52;
     display: block;
-    margin: 0 auto;
+    margin: 15px auto;
 }
 .button:hover {
     background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #fb9e25), color-stop(1, #ffc477) );

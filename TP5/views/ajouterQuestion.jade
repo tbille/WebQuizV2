@@ -12,20 +12,23 @@ block content
       form(action="/ajouterToutesQuestions" method="post")
         section
           h2 Domaine
-          input(type="text" placeholder="Entrez le domaine" name="domain" required)
+          input(type="text" placeholder="HTML, CSS ou JavaScript" name="domain" size="63" required)
         section
           h2 Question
-          input(type="text" placeholder="Entrez la question" name="question" required)
+          input(type="text" placeholder="Entrez la question" name="question" size="63" required)
         section
           h2 Réponses
           div(class="allReponses")
             - var n = 1
             while n < 4
               div
-              input(type="text" placeholder="Réponse #{n++}" name="answers" required)
-              input(type="radio" name="correctAnswer")
-
+                input(type="text" placeholder="Réponse no. #{n++}" name="answers" size="63" required)
+              //input(type="radio" name="correctAnswer")
           a(href="#" class="ajouterReponse") Ajouter une réponse
+          
+        section
+          h2 Bonne réponse
+          input(type="text" placeholder="No. de la bonne réponse" name="correctAnswer" size="21" required)
 
         input(type="submit" value="Ajouter la question" class="button")
           
