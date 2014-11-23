@@ -1,4 +1,5 @@
 var db = require ('../lib/db');
+var random = require('mongoose-simple-random');
 
 var QuestionSchema = new db.Schema({
     domain : String,
@@ -7,6 +8,7 @@ var QuestionSchema = new db.Schema({
     answers: [String]
 })
 
+QuestionSchema.plugin(random);
 var MaQuestion = db.mongoose.model('Questions', QuestionSchema);
 
 
@@ -118,9 +120,73 @@ function ajouterToutesLesQuestions(){
   };
 }
 
+
+
 /*
 Retourne un chiffre entier aléatoire entre min inclusivement et max exclusivement.
 */
 function generateRandom(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
+
+
+// Exportations
+module.exports = {
+    getQuestionById: function(id) {
+        var instance = new MaQuestion();
+        return instance.find( { _id: id } )
+    },
+
+    getRandomQuestion: function(callback) {
+
+     MaQuestion.findOneRandom(function(err, element) {
+                                      if (err) console.log(err);
+                                      else callback(element);
+                                    });
+    },
+
+    
+    // Cette fonction choisit numQuestions nombre de questions selon la liste d'IDs 
+    // de question questionIDs.
+    getRandomIDs: function(domains, num) {
+        var ids = [];
+        while (ids.length < num) {
+            var question = questions[generateRandom(0, questions.length)];
+            if (domains.inArray(question.domain)) {
+                ids.push(question.id);
+                ids = unique(ids);
+            }
+        }
+        return ids;
+    }
+}
+
+/*
+Retourne un chiffre entier aléatoire entre min inclusivement et max exclusivement.
+*/
+function generateRandom(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+}
+
+// Élimine les doublons d'une liste / tableau.
+function unique(list) {
+    var result = [];
+    for (i = 0; i < list.length; i++) {
+        if (!result.inArray(list[i])) {
+            result.push(list[i]);
+        }
+    }
+    return result;
+}
+
+Array.prototype.inArray = function(value) {
+    // Returns true if the passed value is found in the
+    // array. Returns false if it is not.
+    var i;
+    for (i = 0; i < this.length; i++) {
+        if (this[i] == value) {
+            return true;
+        }
+    }
+    return false;
+};

@@ -4,6 +4,8 @@ var Schema = mongoose.Schema;
 module.exports.mongoose = mongoose;
 module.exports.Schema = Schema;
 
+
+
 // Connect to cloud database
 var username = "webquizdb"
 var password = "webquizdb";
