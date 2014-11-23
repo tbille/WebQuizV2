@@ -4,7 +4,8 @@ $(document).ready(function() {
         var n = 3;
  
          $('.ajouterReponse').click(function() {
-        $(scntDiv).append("<div><input type=text size=63 placeholder='Réponse no. "+ ++n +" '/></div>");      
+        $(scntDiv).append("<div><input type=text size=63 name=answers placeholder='Réponse no. "+ ++n +" '/></div>"); 
+        $('#chooseAnswer').attr('max', n);
         });
   
         /* Retiré input avec bouton radio
