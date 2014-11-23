@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var Questions = require('../models/question');
+var db = require('../models/question');
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -8,7 +8,7 @@ router.get('/', function(req, res) {
 
 //    Questions.getRandomQuestion(function(element){ console.log(element);});
 
-     Questions.getRandomIDs(["HTML","CSS"], 2, function(element){console.log(element);});
+     //Questions.getRandomIDs(["HTML","CSS"], 2, function(element){console.log(element);});
 
     res.render('accueil');
 });
@@ -18,16 +18,27 @@ router.get('/tableauBord', function(req, res) {
 }); 
 
 router.get('/question', function(req, res) {
-    var qa = db.getRandomQuestion();
-    res.render('question', { title: "Test rapide", type: "Test", qa: qa } );
+    var qa;
+    db.getRandomQuestion(function(element){ qa=element;
+        res.render('question', { title: "Test rapide", type: "Test", qa: qa } );
+
+    });
+    
+    
 });
 
 router.get('/questionExamen', function(req, res) {
     var ids = req.session.ids;
     var id = ids[req.session.currentQAIndex];
-    var qa = db.getQuestionById(id);
-    req.session.currentQAIndex = req.session.currentQAIndex + 1;
-    res.render('question', { title: "Examen Officiel", type: "Exam", ids: ids, qa: qa } );
+    var qa;
+console.log(ids);
+    db.getQuestionById(id, function(element){ 
+        qa=element;
+        req.session.currentQAIndex = req.session.currentQAIndex + 1;
+        console.log(qa);
+        res.render('question', { title: "Examen Officiel", type: "Exam", ids: ids, qa: qa } );
+
+    });
 });
 
 router.post('/questionExamen', function(req, res) {
@@ -35,8 +46,11 @@ router.post('/questionExamen', function(req, res) {
     req.session.domains = domains;
     var numQuestions = req.body.numQuestions;
     req.session.currentQAIndex = 0;
-    req.session.ids = db.getRandomIDs(domains, numQuestions);
-    res.redirect('/questionExamen');
+    
+    db.getRandomIDs(domains, numQuestions, function(element){
+        req.session.ids= element;
+        res.redirect('/questionExamen');
+    });
 });
 
 router.get('/examenTermine', function(req, res) {
