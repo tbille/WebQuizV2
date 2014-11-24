@@ -9,7 +9,7 @@ var QuestionSchema = new db.Schema({
 })
 
 QuestionSchema.plugin(random);
-var MaQuestion = db.mongoose.model('Questions', QuestionSchema);
+var MaQuestion = db.mongoose.model('db', QuestionSchema); //GT COMMENT j'ai remplacé 'Questions' par 'db'
 
 
 // Exports

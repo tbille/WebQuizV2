@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var db = require('../models/question');
+var db = require('../models/question'); //GT COMMENT: Questions a été remplacé par db
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -66,19 +66,15 @@ router.get('/ajouterQuestion', function(req, res) {
     res.render('ajouterQuestion');
 });
 
-/* Lorsqu'on clique sur le bouton "Ajouter la question" de la page ajouterQuestion, les données vont être postés à '/ajouterToutesQuestions' */
-/*router.get('/ajouterToutesQuestions', function(req, res) {
-    res.render('ajouterToutesQuestions');
-});*/
 
 router.post('/ajouterToutesQuestions', function(req, res) {
-  var domain = req.value.domain;
+  var domain = req.body.domain;
   var question = req.body.question;
   var correctAnswer = req.body.correctAnswer;
   var answers = req.body.answers;
   
-console.log("before call");
-Questions.ajouterQuestion(domain, question, correctAnswer, answers, function(err) {
+ console.log("before call"); //GT COMMENT: ajouté pour tester dans la console
+db.ajouterQuestion(domain, question, correctAnswer, answers, function(err) { //GT COMMENT: j'ai remplacé Questions par db
     if (err) throw err; 
     res.redirect('/ajouterQuestion');
   });  

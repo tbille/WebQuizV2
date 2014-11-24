@@ -8,8 +8,8 @@ var bodyParser = require('body-parser');
 var db = require ('./lib/db');
 var routes = require('./routes/routes');
 
-//integrate question model
-var Questions = require('./models/question.js')
+//GT COMMENT pas besoin d'integrater question model ici
+//var Questions = require('./models/question.js')
 var app = express();
 
 // view engine setup

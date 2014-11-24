@@ -12,12 +12,11 @@ block content
       form(action="/ajouterToutesQuestions" method="post")
         section
           h2 Domaine
-          // Input type text in comments to test select input 
-          //input(type="text" id="selectedDomain" placeholder="HTML, CSS ou JavaScript" name="domain" size="63" required) 
-          select 
-            option(value="HTML") HTML
-            option(value="CSS") CSS
-            option(value="JavaScript") JavaScript
+          select
+            option(value="HTML" name="domain") HTML
+            option(value="CSS" name="domain") CSS
+            option(value="JavaScript" name="domain") Javascript
+          //input(type="text" placeholder="HTML, CSS ou JavaScript" name="domain" size="63" required)
         section
           h2 Question
           input(type="text" placeholder="Entrez la question" name="question" size="63" required)
@@ -37,4 +36,3 @@ block content
 
         input(type="submit" value="Ajouter la question" class="button")
           
-s
