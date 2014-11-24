@@ -70,13 +70,15 @@ router.get('/instruction', function(req, res) {
 });
 
 router.get('/ajouterQuestion', function(req, res) {
+    db.ajouterToutesLesQuestions();
     res.render('ajouterQuestion');
 });
 
+
 /* Lorsqu'on clique sur le bouton "Ajouter la question" de la page ajouterQuestion, les données vont être postés à '/ajouterToutesQuestions' */
-/*router.get('/ajouterToutesQuestions', function(req, res) {
-    res.render('ajouterToutesQuestions');
-});*/
+router.get('/ajouterToutesQuestions', function(req, res) {
+    res.render('ajouterQuestion');
+});
 
 router.post('/ajouterToutesQuestions', function(req, res) {
   var domain = req.value.domain;
