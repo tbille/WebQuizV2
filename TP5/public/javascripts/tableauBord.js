@@ -52,13 +52,18 @@ function countDomainQuestions(checkedDomains) {
     });
     var count = 0;
     if (domains.inArray("HTML")) {
-        count += 10;
+        count += html;
     } 
     if (domains.inArray("CSS")) {
-        count += 2;
+        count += css;
+    }
+    if (domains.inArray("Javascript")) {
+        count += js;
     }
     return count;
 }
+
+
 
 /*
 On met à jour les statistiques globales du joueur à travers le localStorage.

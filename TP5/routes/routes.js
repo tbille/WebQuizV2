@@ -4,7 +4,7 @@ var db = require('../models/question'); //GT COMMENT: Questions a été remplac�
 
 /* GET home page. */
 router.get('/', function(req, res) {
- //Questions.ajouterToutesLesQuestions();
+ //db.ajouterToutesLesQuestions();
 
 //    Questions.getRandomQuestion(function(element){ console.log(element);});
 
@@ -14,7 +14,14 @@ router.get('/', function(req, res) {
 });
 
 router.get('/tableauBord', function(req, res) {
-    res.render('tableauBord');
+    db.numberQuestionsDomaine("HTML", function(html){
+        db.numberQuestionsDomaine("CSS", function(css){
+            db.numberQuestionsDomaine("Javascript", function(js){
+                res.render('tableauBord',{js: js , css: css, html: html});
+            });
+        });
+    });
+    
 }); 
 
 router.get('/question', function(req, res) {
@@ -63,9 +70,16 @@ router.get('/instruction', function(req, res) {
 });
 
 router.get('/ajouterQuestion', function(req, res) {
+    db.ajouterToutesLesQuestions();
     res.render('ajouterQuestion');
 });
 
+
+/* Lorsqu'on clique sur le bouton "Ajouter la question" de la page ajouterQuestion, les données vont être postés à '/ajouterToutesQuestions'
+router.get('/ajouterToutesQuestions', function(req, res) {
+    res.render('ajouterQuestion');
+});
+*/
 
 router.post('/ajouterToutesQuestions', function(req, res) {
   var domain = req.body.domain;
