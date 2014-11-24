@@ -4,6 +4,10 @@ block stylesheet
     link(rel="stylesheet", href="/stylesheets/tableauBord.css")
     script(type="text/javascript" src="/javascripts/utility.js")
     script(type="text/javascript" src="/javascripts/tableauBord.js")
+    script(type="text/javascript").
+        var html = !{html};
+        var css = !{css};
+        var js = !{js};
 
 block content
     section#lightbox

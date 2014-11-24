@@ -149,7 +149,15 @@ module.exports = {
                                     });
     },
 
-    
+    numberQuestionsDomaine: function(domaine,callback){
+
+      MaQuestion.find({domain: domaine},function(err,myResults){
+        if(err) console.log(err)
+        else{
+          callback(myResults.length);
+        }
+      });
+    },
     // Cette fonction choisit numQuestions nombre de questions selon la liste d'IDs 
     // de question questionIDs.
     getRandomIDs: function(domains, num, callback) {

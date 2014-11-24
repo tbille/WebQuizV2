@@ -4,7 +4,7 @@ var db = require('../models/question');
 
 /* GET home page. */
 router.get('/', function(req, res) {
- //Questions.ajouterToutesLesQuestions();
+ //db.ajouterToutesLesQuestions();
 
 //    Questions.getRandomQuestion(function(element){ console.log(element);});
 
@@ -14,7 +14,14 @@ router.get('/', function(req, res) {
 });
 
 router.get('/tableauBord', function(req, res) {
-    res.render('tableauBord');
+    db.numberQuestionsDomaine("HTML", function(html){
+        db.numberQuestionsDomaine("CSS", function(css){
+            db.numberQuestionsDomaine("Javascript", function(js){
+                res.render('tableauBord',{js: js , css: css, html: html});
+            });
+        });
+    });
+    
 }); 
 
 router.get('/question', function(req, res) {
