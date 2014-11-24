@@ -9,7 +9,7 @@ var db = require ('./lib/db');
 var routes = require('./routes/routes');
 
 //GT COMMENT pas besoin d'integrater question model ici
-//var Questions = require('./models/question.js')
+var Questions = require('./models/question.js')
 var app = express();
 
 // view engine setup

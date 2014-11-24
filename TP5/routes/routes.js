@@ -26,9 +26,9 @@ router.get('/tableauBord', function(req, res) {
 
 router.get('/question', function(req, res) {
     var qa;
-    db.getRandomQuestion(function(element){ qa=element;
+    db.getRandomQuestion(function(element){ 
+        qa=element;
         res.render('question', { title: "Test rapide", type: "Test", qa: qa } );
-
     });
     
     
