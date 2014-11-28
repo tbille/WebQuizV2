@@ -1,0 +1,88 @@
+h1 {
+    color: #323000;
+    font-size: 2.2em;
+    margin-bottom: 30px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+h2 {
+    color: #323000;
+    font-size: 1.5em;
+}
+
+i {
+    font-style: italic;
+}
+
+section#main {
+    position: relative;
+    margin: 30px 20px 0 20px;
+}
+
+section#main section p {
+    font-weight: bold;
+}
+
+section#main p, section#main label {
+    display: block;
+    margin-bottom: 15px;
+}
+
+/*
+section#main label {
+    white-space: nowrap;
+}
+*/
+
+section#main > section {
+    display: inline-block;
+    width: 700px;
+}
+
+#main .button {
+    display: inline-block;
+    width: 200px;
+    margin: 15px 10px 20px 0;
+}
+
+aside {
+    position: absolute;
+    right: 0;
+    display: inline-block;
+    background-color: lightgray;
+    border-radius: 8px;
+    height: 150px;
+    width: 250px;
+    text-align: center;
+}
+
+aside > h2 + p {
+    margin-top: 20px;
+}
+
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+
+section#main {
+    position: inherit;
+    margin: 0;
+}
+
+section#main > section {
+    width: 600px;
+}
+
+h2 {
+    font-size: 1.4em;
+}
+
+aside {
+    width: 150px;
+}
+
+#main .button {
+    width: 160px;
+}
+
+}

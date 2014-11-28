@@ -1,0 +1,153 @@
+h1 {
+    color: #323000;
+    font-size: 2.2em;
+    margin-bottom: 30px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+section#main {
+    width: 700px;
+    margin: 30px auto;
+}
+
+section#main > section {
+    display: inline-block;
+    width: 350px;
+    vertical-align: top;
+}
+
+#testrapide {
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+#testrapide a.button, #examen input.button {
+    display: block;
+    margin: 20px auto 10px;
+}
+
+#testrapide a.button {
+    width: 100px;
+}
+
+#examen {
+    border-style: solid;
+    border-width: 1px;
+    text-align: center;
+}
+
+#examen input.button {
+    width: 150px;
+}
+
+#examen label {
+    white-space: nowrap;
+}
+
+#examen form p {
+    font-style: italic;
+}
+
+form p {
+    margin-top: 30px;
+}
+
+input[type="number"] {
+    width: 40px;
+}
+
+aside {
+    display: inline-block;
+    background-color: lightgray;
+    border-radius: 8px;
+    height: 260px;
+    width: 300px;
+    text-align: center;
+    margin-left: 40px;
+}
+
+h2 {
+    color: #323000;
+    font-size: 1.5em;
+    text-transform: uppercase;
+}
+
+aside section {
+    margin-top: 20px;
+}
+
+aside a.button {
+    margin: 30px auto;
+    width: 125px;
+}
+
+section#lightbox {
+    display: none;
+}
+
+section#lightbox:target {
+    display: block;
+}
+
+section#lightbox ul {
+    position: absolute;
+    top: 100px;
+    right: 1%;
+    left: 1%;
+    color: black;
+    list-style: none;
+    height: 500px;
+    width: 360px;
+    margin: 0px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    overflow: scroll;
+}
+
+section#lightbox li:first-child {
+    font-size: 20px;
+    border-bottom: 3px solid gray;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+section#lightbox li {
+    margin: 10px 0;
+}
+
+.close_msg::before {
+    content: "";
+    display: block;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0.85;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+
+section#main {
+    width: 600px;
+}
+
+section#main > section {
+    width: 300px;
+}
+
+aside {
+    width: 250px;
+}
+
+h2 {
+    font-size: 1.4em;
+}
+
+}
