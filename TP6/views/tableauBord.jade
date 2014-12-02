@@ -25,19 +25,19 @@ block content
                         form(method="post" action="/questionExamen")
                             p Choisissez le domaine des questions.
                             label(for="html")
-                                input(type="checkbox", name="domain", value="HTML")
+                                input(type="checkbox", name="domain", value="HTML" ng-click="disable()" )
                                 |HTML5
                             label(for="css")
-                                input(type="checkbox", name="domain", value="CSS")
+                                input(type="checkbox", name="domain", value="CSS" ng-click="disable()" )
                                 |CSS3
                             label(for="js")
-                                input(type="checkbox", name="domain", value="JS")
+                                input(type="checkbox", name="domain", value="JS" ng-click="disable()" )
                                 |Javascript
 
                             p Choisissez le nombre de questions.
                             input(type="number", name="numQuestions", min="1", max="999", value="1")
 
-                            input.button(type="submit", value="Examen officiel", disabled)
+                            input.button(type="submit", value="Examen officiel" ng-disabled="disabled")
                 aside
                     h2 Statistiques
                     section

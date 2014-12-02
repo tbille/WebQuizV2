@@ -1,4 +1,4 @@
-// Actions à poser dès que le document est chargé
+/*// Actions à poser dès que le document est chargé
 $(document).ready(function() {
     $("a#tableauBord").addClass("current");
 
@@ -46,23 +46,10 @@ function validateForm(checkedDomains, number) {
     }
 }
 
-function countDomainQuestions(checkedDomains) {
-    var domains = jQuery.map(checkedDomains, function(checkbox, i) {
-        return $(checkbox).val();
-    });
-    var count = 0;
-    if (domains.inArray("HTML")) {
-        count += 10;
-    } 
-    if (domains.inArray("CSS")) {
-        count += 2;
-    }
-    return count;
-}
-
+*/
 /*
 On met à jour les statistiques globales du joueur à travers le localStorage.
-*/
+
 function updateUserGlobalState() {
     var goodCurrentAnswers = localStorage["quiz.stat.currentTest.goodAnswers"];
     var totalCurrentAnswers = localStorage["quiz.stat.currentTest.totalAnswers"];
@@ -85,18 +72,18 @@ function updateUserGlobalState() {
     localStorage["quiz.stat.currentExam.goodAnswers"] = 0;
     localStorage["quiz.stat.currentExam.totalAnswers"] = 0;
 }
-
+*/
 /*
 On met à jour la note globale pour l'ensemble des tests rapides effectués.
-*/
+
 function updateQuickTest() {
     $("span#quickTestGood").text(localStorage["quiz.stat.quicktest.goodAnswers"]);
     $("span#quickTestTotal").text(localStorage["quiz.stat.quicktest.totalAnswers"]);
 }
-
+*/
 /*
 Cette fonction s'occupe de remplir la liste d'examens effectué par l'étudiant.
-*/
+
 function updateExamList() {
     if (localStorage["quiz.exams.taken"] == undefined) {
         localStorage["quiz.exams.taken"] = JSON.stringify([]);
@@ -124,6 +111,41 @@ function updateExamList() {
         var examAverage = (examAverage / examsTaken.length * 100).toFixed(2);
         $("#examAverage").text(examAverage + " %");
     }
+}
+
+
+*/
+
+
+var app = angular.module("monApp",[]);
+
+app.controller("tdb",function($scope,$http){
+    // permet d'activer le bouton pour l'examen
+    $scope.disabled = true;
+    $scope.disable=function(){
+        var nbQuestions = countDomainQuestions($("input[name='domain']:checked"));
+        if(nbQuestions>0)
+            $scope.disabled = false;
+        else
+            $scope.disabled = true;
+    }
+});
+
+
+
+
+function countDomainQuestions(checkedDomains) {
+    var domains = jQuery.map(checkedDomains, function(checkbox, i) {
+        return $(checkbox).val();
+    });
+    var count = 0;
+    if (domains.inArray("HTML")) {
+        count += 10;
+    } 
+    if (domains.inArray("CSS")) {
+        count += 2;
+    }
+    return count;
 }
 
 Array.prototype.inArray = function(value) {
