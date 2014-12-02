@@ -6,48 +6,50 @@ block stylesheet
     script(type="text/javascript" src="/javascripts/tableauBord.js")
 
 block content
-    section#lightbox
-        a.close_msg(href="#")
-        ul
-            li Résultats détaillés des examens
+    div(ng-app="monApp")
+        div(ng-controller="tdb")
+            section#lightbox
+                a.close_msg(href="#")
+                ul
+                    li Résultats détaillés des examens
 
-    section#main
-        h1 Menu Personnel
-        section
-            div#testrapide
-                h2 Début d'un test rapide.
-                a.button(href="/question") Test rapide
+            section#main
+                h1 Menu Personnel
+                section
+                    div#testrapide
+                        h2 Début d'un test rapide.
+                        a.button(href="/question") Test rapide
 
-            div#examen
-                h2 Début d'un examen officiel
-                form(method="post" action="/questionExamen")
-                    p Choisissez le domaine des questions.
-                    label(for="html")
-                        input(type="checkbox", name="domain", value="HTML")
-                        |HTML5
-                    label(for="css")
-                        input(type="checkbox", name="domain", value="CSS")
-                        |CSS3
-                    label(for="js")
-                        input(type="checkbox", name="domain", value="JS")
-                        |Javascript
+                    div#examen
+                        h2 Début d'un examen officiel
+                        form(method="post" action="/questionExamen")
+                            p Choisissez le domaine des questions.
+                            label(for="html")
+                                input(type="checkbox", name="domain", value="HTML")
+                                |HTML5
+                            label(for="css")
+                                input(type="checkbox", name="domain", value="CSS")
+                                |CSS3
+                            label(for="js")
+                                input(type="checkbox", name="domain", value="JS")
+                                |Javascript
 
-                    p Choisissez le nombre de questions.
-                    input(type="number", name="numQuestions", min="1", max="999", value="1")
+                            p Choisissez le nombre de questions.
+                            input(type="number", name="numQuestions", min="1", max="999", value="1")
 
-                    input.button(type="submit", value="Examen officiel", disabled)
-        aside
-            h2 Statistiques
-            section
-                p Note cummulative test rapide :
-                p
-                    span#quickTestGood 0 
-                    |/ 
-                    span#quickTestTotal 0
-            section
-                p Note moyenne des examens :
-                p#examAverage ---
-            p
-                a.button(href="#lightbox") Voir détails ...
-            p
-                a#reset.button(href="/tableauBord") Remise à zéro
+                            input.button(type="submit", value="Examen officiel", disabled)
+                aside
+                    h2 Statistiques
+                    section
+                        p Note cummulative test rapide :
+                        p
+                            span#quickTestGood 0 
+                            |/ 
+                            span#quickTestTotal 0
+                    section
+                        p Note moyenne des examens :
+                        p#examAverage ---
+                    p
+                        a.button(href="#lightbox") Voir détails ...
+                    p
+                        a#reset.button(href="/tableauBord") Remise à zéro

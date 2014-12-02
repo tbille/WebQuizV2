@@ -7,6 +7,12 @@ router.get('/', function(req, res) {
     res.render('accueil');
 });
 
+router.get('/getQuestion/:idQ', function(req,res){
+    console.log("message du serveur");
+
+    res.json({ msgId: "wazaaaa"});
+});
+
 router.get('/tableauBord', function(req, res) {
     res.render('tableauBord');
 });
