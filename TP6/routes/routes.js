@@ -13,6 +13,39 @@ router.get('/getQuestion/:idQ', function(req,res){
     res.json({ msgId: "wazaaaa"});
 });
 
+// route qui me permet de récuperer le nombre de questions par domaine
+router.get('/getNumberOfQuestionsDomaine', function(req,res){
+    var domaines = [];
+    Question.getNumberOfQuestions("HTML", function(error, elementhtml){
+        Question.getNumberOfQuestions("CSS", function(error, elementcss){
+                Question.getNumberOfQuestions("JS", function(error, elementjs){
+                    if(elementhtml){
+                        domaines.push(elementhtml);
+                    }
+                    else{
+                        domaines.push(0);
+                    }
+                    if(elementcss){
+                        domaines.push(elementcss);
+                    }
+                    else{
+                        domaines.push(0);
+                    }
+                    if(elementjs){
+                        domaines.push(elementjs);
+                    }
+                    else{
+                        domaines.push(0);
+                    }
+                    res.json({domaines: domaines});
+                });
+            });
+    });
+
+    
+});
+
+
 router.get('/tableauBord', function(req, res) {
     res.render('tableauBord');
 });

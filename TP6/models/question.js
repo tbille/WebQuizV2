@@ -14,6 +14,7 @@ QuestionSchema.plugin(random);
 var Question = mongoose.model('Question', QuestionSchema);
 
 module.exports = {
+
     getRandomQuestion: function(callback) {
         Question.findOneRandom(function(err, question) {
             if (err) {
@@ -41,6 +42,16 @@ module.exports = {
             callback(err, questions);
         });
     },
+
+    getNumberOfQuestions: function(domaine, callback) {
+      Question.find({domain: domaine}, function(err, questions){
+          if (err) {
+                callback(err, null);
+            }
+            callback(err, questions.length);
+          });
+    },
+
     addQuestion: function(domain, question, answers, correctAnswer, callback) {
         var questionModel = new Question();
         questionModel.domain = domain;
