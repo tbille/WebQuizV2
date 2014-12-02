@@ -117,10 +117,6 @@ input[type="submit"]::-moz-focus-inner {
     border: 0;
 }
 
-input[type="number"] {
-   width:165px;
-}
-
 /************************************
 * Mise en forme du bouton
 ************************************/
@@ -160,7 +156,7 @@ input[type="number"] {
     text-align:center;
     text-shadow:1px 1px 0px #cc9f52;
     display: block;
-    margin: 15px auto;
+    margin: 0 auto;
 }
 .button:hover {
     background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #fb9e25), color-stop(1, #ffc477) );

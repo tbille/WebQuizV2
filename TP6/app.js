@@ -5,11 +5,12 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var bodyParser = require('body-parser');
-var db = require ('./lib/db');
+
 var routes = require('./routes/routes');
 
-//integrate question model
-var Questions = require('./models/question.js')
+// Configuration de Mongoose
+require('./lib/db');
+
 var app = express();
 
 // view engine setup
@@ -21,7 +22,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
-app.use(session({secret: "abcdef"}));
+app.use(session({ secret: "abcdef", resave: true, saveUninitialized: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Définit toutes les routes de mon application
@@ -57,8 +58,6 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
-
-
 
 
 module.exports = app;

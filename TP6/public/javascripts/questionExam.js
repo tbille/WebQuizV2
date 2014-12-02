@@ -27,7 +27,7 @@ $(document).ready(function() {
         updateStats();
 
         var nextHTML = "";
-        if (indexCourant < questionIDs.length - 1) {
+        if (indexCourant < numQuestions - 1) {
             $(this).text("Question suivante");
             nextHTML = "/questionExamen";
         } else {
@@ -44,7 +44,7 @@ $(document).ready(function() {
     });
 
     $("a.abandon").click(function() {
-        localStorage["quiz.stat.currentExam.totalAnswers"] = questionIDs.length;
+        localStorage["quiz.stat.currentExam.totalAnswers"] = numQuestions;
     });
 });
 

@@ -2,37 +2,34 @@ extends layout
 
 block stylesheet
     link(rel="stylesheet", href="/stylesheets/ajouterQuestion.css")
-    link(rel="stylesheet", href="/stylesheets/globale.css")
-
     script(type="text/javascript" src="/javascripts/ajouterQuestion.js")
-    
-block content
-    section(class="center")
-      h1 Ajouter une question
-      form(action="/ajouterToutesQuestions" method="post")
-        section
-          h2 Domaine
-          select
-            option(value="HTML" name="domain") HTML
-            option(value="CSS" name="domain") CSS
-            option(value="JavaScript" name="domain") Javascript
-          //input(type="text" placeholder="HTML, CSS ou JavaScript" name="domain" size="63" required)
-        section
-          h2 Question
-          input(type="text" placeholder="Entrez la question" name="question" size="63" required)
-        section
-          h2 Réponses
-          div(class="allReponses")
-            - var n = 1
-            while n < 4
-              div
-                input(type="text" placeholder="Réponse no. #{n++}" name="answers" size="63" required)
-              //input(type="radio" name="correctAnswer")
-          a(href="#" class="ajouterReponse") Ajouter une réponse
-          
-        section
-          h2 Bonne réponse
-          input(type="number" min="1" max="3" id="chooseAnswer" placeholder="No. de la bonne réponse" name="correctAnswer" required)
 
-        input(type="submit" value="Ajouter la question" class="button")
-          
+block content
+    h1 Ajouter une question
+
+    form(method="post" action="/ajouterQuestion")
+        p Remplissez les champs pour créer une nouvelle question.
+
+        p Domaine de la question:
+            label(for="html")
+                input(type="radio", name="domain", value="HTML", checked)
+                |HTML5
+            label(for="css")
+                input(type="radio", name="domain", value="CSS")
+                |CSS3
+            label(for="js")
+                input(type="radio", name="domain", value="Javascript")
+                |Javascript
+
+        p Question à poser: 
+            input(type="text", name="question", required)
+
+        p Réponses possibles à la question:
+            input(type="text", name="answer", required)
+            a#ajouter.button Ajouter
+            a#supprimer.button Supprimer
+
+        p Index de la bonne réponse: 
+            input(type="number", name="goodAnswer", min="1", max="1", value="1")
+
+        input#envoye.button(type="submit", value="Enregistrer la question")

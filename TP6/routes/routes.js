@@ -1,31 +1,37 @@
 var express = require('express');
 var router = express.Router();
-var Questions = require('../models/question');
+var Question = require('../models/question');
 
 /* GET home page. */
 router.get('/', function(req, res) {
-
-
-    questions.getRandomQuestion(function(element){ console.log(element);});
-
     res.render('accueil');
 });
 
 router.get('/tableauBord', function(req, res) {
     res.render('tableauBord');
-}); 
+});
 
 router.get('/question', function(req, res) {
-    var qa = db.getRandomQuestion();
-    res.render('question', { title: "Test rapide", type: "Test", qa: qa } );
+    Question.getRandomQuestion(function(err, qa) {
+        if (err) {
+            res.send(err);
+        }
+        console.log(qa);
+        res.render('question', { title: "Test rapide", type: "Test", qa: qa } );
+    });
 });
 
 router.get('/questionExamen', function(req, res) {
     var ids = req.session.ids;
     var id = ids[req.session.currentQAIndex];
-    var qa = db.getQuestionById(id);
-    req.session.currentQAIndex = req.session.currentQAIndex + 1;
-    res.render('question', { title: "Examen Officiel", type: "Exam", ids: ids, qa: qa } );
+    Question.getQuestionById(id, function(err, qa) {
+        if (err) {
+            res.send(err);
+        }
+        console.log(qa);
+        req.session.currentQAIndex = req.session.currentQAIndex + 1;
+        res.render('question', { title: "Examen Officiel", type: "Exam", numQuestions: ids.length, qa: qa } );
+    });
 });
 
 router.post('/questionExamen', function(req, res) {
@@ -33,8 +39,14 @@ router.post('/questionExamen', function(req, res) {
     req.session.domains = domains;
     var numQuestions = req.body.numQuestions;
     req.session.currentQAIndex = 0;
-    req.session.ids = db.getRandomIDs(domains, numQuestions);
-    res.redirect('/questionExamen');
+
+    Question.getRandomIDs(domains, numQuestions, function(err, questionIDs) {
+        if (err) {
+            res.send(err);
+        }
+        req.session.ids = questionIDs;
+        res.redirect('/questionExamen');
+    });
 });
 
 router.get('/examenTermine', function(req, res) {
@@ -50,23 +62,23 @@ router.get('/ajouterQuestion', function(req, res) {
     res.render('ajouterQuestion');
 });
 
-/* Lorsqu'on clique sur le bouton "Ajouter la question" de la page ajouterQuestion, les données vont être postés à '/ajouterToutesQuestions' */
-/*router.get('/ajouterToutesQuestions', function(req, res) {
-    res.render('ajouterToutesQuestions');
-});*/
+router.post('/ajouterQuestion', function(req, res) {
+    var domain = req.body.domain;
+    var question = req.body.question;
+    var answers = [].concat(req.body.answer);
+    var correctAnswer = req.body.goodAnswer;
 
-router.post('/ajouterToutesQuestions', function(req, res) {
-  var domain = req.body.domain;
-  var question = req.body.question;
-  var correctAnswer = req.body.correctAnswer;
-  var answers = req.body.answers;
-  
-console.log("before call");
-Questions.ajouterQuestion(domain, question, correctAnswer, answers, function(err) {
-    if (err) throw err; 
-    res.redirect('/ajouterQuestion');
-  });  
+    Question.addQuestion(domain, question, answers, correctAnswer, function(err, question) {
+        if (err) {
+            res.send(err);
+        }
+        res.json({ message: 'Question créé!' });
+    });
 });
 
+router.get('/ajouterTousLesQuestions', function(req, res) {
+    Question.addAllQuestions();
+    res.render('ajouterQuestion');
+});
 
 module.exports = router;

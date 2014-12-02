@@ -1,23 +1,23 @@
-//Ajouter un input field lorsqu'on clique sur Ajouter une reponse
 $(document).ready(function() {
-        var scntDiv = $('.allReponses');   
-        var n = 3;
- 
-         $('.ajouterReponse').click(function() {
-        $(scntDiv).append("<div><input type=text size=63 name=answers placeholder='Réponse no. "+ ++n +" '/></div>"); 
-        $('#chooseAnswer').attr('max', n);
+
+    addQuestionClickEvent();
+
+    function addQuestionClickEvent() {
+        $("a#ajouter").click(function() {
+            $(this).after("<input type=\"text\" name=\"answer\" required/><a id=\"ajouter\" class=\"button\">Ajouter</a>");
+            $(this).remove();
+            $("input[type='number']").attr("max", $("p input[name=\"answer\"]").length);
+            addQuestionClickEvent();
         });
-  
-        /* Retiré input avec bouton radio
-        $('.ajouterReponse').click(function() {
-        $(scntDiv).append("<div><input type=text placeholder='Réponse "+ ++n +" '/><input type=radio name=answer/></div>");      
-        });
-        */
+    }
+
+    $("a#supprimer").click(function() {
+        var numAnswers = $("p input[name=\"answer\"]").length;
+        if (numAnswers > 1) {
+            var answerInput = $("p input[name=\"answer\"]:last");
+            answerInput.remove();
+            numAnswers = numAnswers - 1;
+        }
+        $("input[type='number']").attr("max", numAnswers);
+    });
 });
-
-
-
-              
-
-         
-   

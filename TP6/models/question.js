@@ -1,41 +1,88 @@
-var db = require ('../lib/db');
+var mongoose = require('mongoose');
 var random = require('mongoose-simple-random');
+var Schema = mongoose.Schema;
+var Utility = require('../lib/utility');
 
-var QuestionSchema = new db.Schema({
-    domain : String,
+var QuestionSchema = new Schema({
+    domain: String,
     question: String,
-    correctAnswer: Number,
-    answers: [String]
-})
-
+    answers: [String],
+    correctAnswer: Number
+});
 QuestionSchema.plugin(random);
-var MaQuestion = db.mongoose.model('Questions', QuestionSchema);
 
+var Question = mongoose.model('Question', QuestionSchema);
 
-// Exports
-module.exports.ajouterQuestion = ajouterQuestion;
-module.exports.ajouterToutesLesQuestions = ajouterToutesLesQuestions;
+module.exports = {
+    getRandomQuestion: function(callback) {
+        Question.findOneRandom(function(err, question) {
+            if (err) {
+                callback(err, null);
+            }
+            callback(err, question);
+        });
+    },
+    getQuestionById: function(questionID, callback) {
+        Question.findOne( {_id: questionID._id} ).exec(function(err, question) {
+            if (err) {
+                callback(err, null);
+            }
+            callback(err, question);
+        });
+    },
+    getRandomIDs: function(domains, num, callback) {
+        var filter = { domain: { $in: domains } };
+        var fields = { _id: 1 };
+        var options = { limit: num };
+        Question.findRandom(filter, fields, options, function(err, questions) {
+            if (err) {
+                callback(err, null);
+            }
+            callback(err, questions);
+        });
+    },
+    addQuestion: function(domain, question, answers, correctAnswer, callback) {
+        var questionModel = new Question();
+        questionModel.domain = domain;
+        questionModel.question = question;
+        questionModel.answers = answers;
+        questionModel.correctAnswer = correctAnswer;
 
-// Add question to database
-function ajouterQuestion( domain, question, correctAnswer, answers, callback) {
-  console.log("in add");
-  var instance = new MaQuestion();
-  instance.domain = domain;
-  instance.question = question;
-  instance.correctAnswer = correctAnswer ;
-  instance.answers = answers;
-  instance.save(function (err) {
-    if (err) {
-      callback(err);
+        questionModel.save(function(err) {
+            if (err) {
+                callback(err);
+            }
+            callback(null, questionModel);
+        });
+    },
+    addAllQuestions: function() {
+        for (i = 0; i < questions.length; i++) {
+            var maQuestion = questions[i];
+
+            var questionModel = new Question();
+            questionModel.domain = maQuestion.domain;
+            questionModel.question = maQuestion.question;
+            questionModel.answers = maQuestion.answers;
+            questionModel.correctAnswer = maQuestion.correctAnswer;
+
+            questionModel.save();
+        }
     }
-    else {
-      callback(null, instance);
-    }
-  });
 }
 
- 
+Array.prototype.inArray = function(value) {
+    // Returns true if the passed value is found in the
+    // array. Returns false if it is not.
+    var i;
+    for (i = 0; i < this.length; i++) {
+        if (this[i] == value) {
+            return true;
+        }
+    }
+    return false;
+};
 
+// Mini base de données qui contient l'ensemble des questions
 questions = [
     { id: 1,
       domain: "HTML", 
@@ -108,85 +155,11 @@ questions = [
       question: "À quoi sert le langage CSS ?",
       correctAnswer: 2,
       answers: ["À réaliser des pages dynamiques", "À ajouter du style aux documents web", "À insérer du contenu dans une page internet"]
+    },
+    { id: 13,
+      domain: "",
+      question: "",
+      correctAnswer: 0,
+      answers: []
     }
 ];
-
-function ajouterToutesLesQuestions(){
-  for (var i = 0; i < questions.length; i++) {
-    //domain, question, correctAnswer, Answers, callback
-    ajouterQuestion(questions[i].domain,questions[i].question,questions[i].correctAnswer,questions[i].answers, function(){
-      console.log("Questions Ajoutées");
-    });
-  };
-}
-
-
-
-/*
-Retourne un chiffre entier aléatoire entre min inclusivement et max exclusivement.
-*/
-function generateRandom(min, max) {
-    return Math.floor(Math.random() * (max - min)) + min;
-}
-
-
-// Exportations
-module.exports = {
-    getQuestionById: function(id) {
-        var instance = new MaQuestion();
-        return instance.find( { _id: id } )
-    },
-
-    getRandomQuestion: function(callback) {
-
-     MaQuestion.findOneRandom(function(err, element) {
-                                      if (err) console.log(err);
-                                      else callback(element);
-                                    });
-    },
-
-    
-    // Cette fonction choisit numQuestions nombre de questions selon la liste d'IDs 
-    // de question questionIDs.
-    getRandomIDs: function(domains, num) {
-        var ids = [];
-        while (ids.length < num) {
-            var question = questions[generateRandom(0, questions.length)];
-            if (domains.inArray(question.domain)) {
-                ids.push(question.id);
-                ids = unique(ids);
-            }
-        }
-        return ids;
-    }
-}
-
-/*
-Retourne un chiffre entier aléatoire entre min inclusivement et max exclusivement.
-*/
-function generateRandom(min, max) {
-    return Math.floor(Math.random() * (max - min)) + min;
-}
-
-// Élimine les doublons d'une liste / tableau.
-function unique(list) {
-    var result = [];
-    for (i = 0; i < list.length; i++) {
-        if (!result.inArray(list[i])) {
-            result.push(list[i]);
-        }
-    }
-    return result;
-}
-
-Array.prototype.inArray = function(value) {
-    // Returns true if the passed value is found in the
-    // array. Returns false if it is not.
-    var i;
-    for (i = 0; i < this.length; i++) {
-        if (this[i] == value) {
-            return true;
-        }
-    }
-    return false;
-};
