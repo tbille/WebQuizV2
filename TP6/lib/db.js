@@ -1,9 +1,9 @@
 var mongoose = require('mongoose');
-
+ 
 // Connect to cloud database
-var username = "xxx";
-var password = "xxx";
-var address = "xxx;
+var username = "webquizdb"
+var password = "webquizdb";
+var address = '@ds053140.mongolab.com:53140/webquizdb';
 connect();
 
 // Connect to mongo
