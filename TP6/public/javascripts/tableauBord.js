@@ -1,6 +1,5 @@
-// Actions à poser dès que le document est chargé
+/*// Actions à poser dès que le document est chargé
 $(document).ready(function() {
-    $("a#tableauBord").addClass("current");
 
     // Mise à jour des statistiques globales de l'utilisateur
     updateUserGlobalState();
@@ -11,24 +10,6 @@ $(document).ready(function() {
     // On met à jour le score des examens
     updateExamList();
 
-    // Validation du formulaire d'examen
-    var domainCheckboxes = $("input[name='domain']");
-
-    var number = $("input[type='number']");
-    domainCheckboxes.click(function() {
-        validateForm($("input[name='domain']:checked"), number);
-    });
-    // Validation du nombre de question
-    number.change(function() {
-        validateForm($("input[name='domain']:checked"), number);
-    });
-
-    // Max nombre de questions en fonction des questions et domaines dans la BD
-    // Hardcoder le nb de question max selon un domain - TP6 avec Ajax
-    domainCheckboxes.click(function() {
-        $("input[type='number']").attr("min", 1);
-        $("input[type='number']").attr("max", countDomainQuestions($("input[name='domain']:checked")));
-    });
 
     // Supprime les statistiques enregistrées de l'utilisateur
     $("a#reset").click(function() {
@@ -36,33 +17,10 @@ $(document).ready(function() {
     });
 });
 
-function validateForm(checkedDomains, number) {
-    if (parseInt(number.val()) >= 1 && parseInt(number.val()) <= countDomainQuestions(checkedDomains) 
-        && number.val().length != 0) {
-        
-        $("input[type='submit']").attr("disabled", false);
-    } else {
-        $("input[type='submit']").attr("disabled", true);
-    }
-}
-
-function countDomainQuestions(checkedDomains) {
-    var domains = jQuery.map(checkedDomains, function(checkbox, i) {
-        return $(checkbox).val();
-    });
-    var count = 0;
-    if (domains.inArray("HTML")) {
-        count += 10;
-    } 
-    if (domains.inArray("CSS")) {
-        count += 2;
-    }
-    return count;
-}
-
+*/
 /*
 On met à jour les statistiques globales du joueur à travers le localStorage.
-*/
+
 function updateUserGlobalState() {
     var goodCurrentAnswers = localStorage["quiz.stat.currentTest.goodAnswers"];
     var totalCurrentAnswers = localStorage["quiz.stat.currentTest.totalAnswers"];
@@ -85,18 +43,18 @@ function updateUserGlobalState() {
     localStorage["quiz.stat.currentExam.goodAnswers"] = 0;
     localStorage["quiz.stat.currentExam.totalAnswers"] = 0;
 }
-
+*/
 /*
 On met à jour la note globale pour l'ensemble des tests rapides effectués.
-*/
+
 function updateQuickTest() {
     $("span#quickTestGood").text(localStorage["quiz.stat.quicktest.goodAnswers"]);
     $("span#quickTestTotal").text(localStorage["quiz.stat.quicktest.totalAnswers"]);
 }
-
+*/
 /*
 Cette fonction s'occupe de remplir la liste d'examens effectué par l'étudiant.
-*/
+
 function updateExamList() {
     if (localStorage["quiz.exams.taken"] == undefined) {
         localStorage["quiz.exams.taken"] = JSON.stringify([]);
@@ -124,6 +82,63 @@ function updateExamList() {
         var examAverage = (examAverage / examsTaken.length * 100).toFixed(2);
         $("#examAverage").text(examAverage + " %");
     }
+}
+
+
+*/
+
+
+var app = angular.module("monApp",[]);
+
+app.controller("tdb",function($scope,$http){
+    // Page Courante
+    $("a#tableauBord").addClass("current");
+    // permet d'activer le bouton pour l'examen
+    countDomainQuestions($("input[name='domain']:checked"),$http, function(nbQuestions){
+        if(nbQuestions>0){
+            $scope.disabled = false;
+            $("input[type='number']").attr("min", 1);
+            $("input[type='number']").attr("max", nbQuestions);
+        }
+        else
+            $scope.disabled = true;
+    });
+    $scope.disable=function(){
+        countDomainQuestions($("input[name='domain']:checked"),$http, function(nbQuestions){
+            if(nbQuestions>0){
+                $scope.disabled = false;
+                $("input[type='number']").attr("min", 1);
+                $("input[type='number']").attr("max", nbQuestions);
+            }
+            else
+                $scope.disabled = true;
+        });
+
+    }
+});
+
+
+
+
+var countDomainQuestions = function(checkedDomains,$http,callback) {
+    $http.get("/getNumberOfQuestionsDomaine").success(function(data){
+        var domains = jQuery.map(checkedDomains, function(checkbox, i) {
+            return $(checkbox).val();
+        });
+        count=0;
+        if (domains.inArray("HTML")) {
+            count+=data.domaines[0];
+        }
+        if (domains.inArray("CSS")) {
+            count+=data.domaines[1];
+        }
+        if (domains.inArray("JS")) {
+            count+=data.domaines[2];
+        }
+        callback(count);
+    }).error(function(){
+      callback(0);
+    });
 }
 
 Array.prototype.inArray = function(value) {

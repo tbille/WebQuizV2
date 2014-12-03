@@ -5,21 +5,18 @@ block stylesheet
     script(type="text/javascript" src="/javascripts/accueil.js")
 
 block content
-    div(ng-app="monApp")
-        div(ng-controller="accueil")
-            button(ng-click="testFunction()") test
-            div#logo
-                img(src="/images/html-css-js.png")
-            
-            article
-                h1 Questionnaire sur le web
-                p.
-                    Ce site web permet au gens de tester leurs connaissances théoriques 
-                    sur les technologies du Web 2.0.
+    div#logo
+        img(src="/images/html-css-js.png")
+    
+    article
+        h1 Questionnaire sur le web
+        p.
+            Ce site web permet au gens de tester leurs connaissances théoriques 
+            sur les technologies du Web 2.0.
 
-                h2 Détails ...
-                p.
-                    L'ensemble des questions qui seront posées porteront sur HTML5, 
-                    CSS3 et Javascript.
+        h2 Détails ...
+        p.
+            L'ensemble des questions qui seront posées porteront sur HTML5, 
+            CSS3 et Javascript.
 
-                a.button(href="/tableauBord") Commencer l'aventure
+        a.button(href="/tableauBord") Commencer l'aventure

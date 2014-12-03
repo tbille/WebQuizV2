@@ -5,41 +5,38 @@ block stylesheet
     script(type="text/javascript" src="/javascripts/utility.js")
 
     if(type === "Test")
-        script(type="text/javascript").
-            var correctAnswer = !{qa.correctAnswer};
         script(type="text/javascript" src="/javascripts/question.js")
     else if (type === "Exam")
         script(type="text/javascript").
-            var correctAnswer = !{qa.correctAnswer};
             var numQuestions = !{numQuestions};
         script(type="text/javascript" src="/javascripts/questionExam.js")
-
 block content
-    section#main
-        h1= title
-        section
-            h2  Domaine: 
-                span#domain= qa.domain
-            p
-                i Question: 
-                span#question= qa.question
-            fieldset
-                each answer, i in qa.answers
-                    label(for= i+1)
-                        input(type="radio" name="answer" value= (i+1))
-                        = answer
+    div(ng-app="monApp")
+        div(ng-controller="question")
+            section#main
+                h1= title
+                section
+                    h2  Domaine: 
+                        span#domain {{domain}}
+                    p
+                        i Question: 
+                        span#question {{question}}
+                    fieldset(ng-repeat="answer in answers")
+                        label
+                            input(type="radio" name="answer" value="{{$index + 1}}") 
+                            {{answer}}
 
-            if(type === "Test")
-                a.button(href="/tableauBord") Retour au menu
-            else if (type == "Exam")
-                a.button.abandon(href="/examenTermine") Abandonner
+                    if(type === "Test")
+                        a.button(href="/tableauBord") Retour au menu
+                    else if (type == "Exam")
+                        a.button.abandon(href="/examenTermine") Abandonner
 
-            a.button.correct Corriger
+                    a.button.correct(href="" ng-click="corriger()") Corriger
 
-        aside
-            h2 Statistiques
-            p Note courante :
-            p   
-                span#goodAnswers 0 
-                |/ 
-                span#totalAnswers 0
+                aside
+                    h2 Statistiques
+                    p Note courante :
+                    p   
+                        span#goodAnswers 0 
+                        |/ 
+                        span#totalAnswers 0

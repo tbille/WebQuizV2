@@ -7,29 +7,79 @@ router.get('/', function(req, res) {
     res.render('accueil');
 });
 
-router.get('/getQuestion/:idQ', function(req,res){
-    console.log("message du serveur");
+// route qui me permet de récuperer le nombre de questions par domaine
+router.get('/getNumberOfQuestionsDomaine', function(req,res){
+    var domaines = [];
+    Question.getNumberOfQuestions("HTML", function(error, elementhtml){
+        Question.getNumberOfQuestions("CSS", function(error, elementcss){
+                Question.getNumberOfQuestions("JS", function(error, elementjs){
+                    if(elementhtml){
+                        domaines.push(elementhtml);
+                    }
+                    else{
+                        domaines.push(0);
+                    }
+                    if(elementcss){
+                        domaines.push(elementcss);
+                    }
+                    else{
+                        domaines.push(0);
+                    }
+                    if(elementjs){
+                        domaines.push(elementjs);
+                    }
+                    else{
+                        domaines.push(0);
+                    }
+                    res.json({domaines: domaines});
+                });
+            });
+    });
+});
 
-    res.json({ msgId: "wazaaaa"});
+router.get('/getRandomQuestion', function(req,res){
+    Question.getRandomQuestion(function(err, qa) {
+        console.log("test");
+        if (err) {
+            res.send(err);
+        }
+        console.log(qa);
+        res.json({ idQuestion: qa._id , question: qa.question, domain: qa.domain,  answers: qa.answers } );
+    });
 });
 
 router.get('/tableauBord', function(req, res) {
     res.render('tableauBord');
 });
 
+
+router.get('/getCorrectAnswer/:id',function(req,res){
+    Question.getQuestionById({_id: req.params.id}, function(error,element){
+        if(element){
+            res.json({correctAnswer: element.correctAnswer});}
+        else{
+            res.send(error);
+        }
+    });
+});
+
+
 router.get('/question', function(req, res) {
-    Question.getRandomQuestion(function(err, qa) {
+    /*Question.getRandomQuestion(function(err, qa) {
         if (err) {
             res.send(err);
         }
         console.log(qa);
         res.render('question', { title: "Test rapide", type: "Test", qa: qa } );
-    });
+    });*/
+
+    res.render('question', { title: "Test rapide", type: "Test" } );
 });
 
 router.get('/questionExamen', function(req, res) {
     var ids = req.session.ids;
     var id = ids[req.session.currentQAIndex];
+    console.log(id);
     Question.getQuestionById(id, function(err, qa) {
         if (err) {
             res.send(err);
@@ -39,6 +89,7 @@ router.get('/questionExamen', function(req, res) {
         res.render('question', { title: "Examen Officiel", type: "Exam", numQuestions: ids.length, qa: qa } );
     });
 });
+
 
 router.post('/questionExamen', function(req, res) {
     var domains = [].concat(req.body.domain);
