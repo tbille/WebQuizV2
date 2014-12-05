@@ -46,7 +46,9 @@ $(document).ready(function() {
     $("a.abandon").click(function() {
         localStorage["quiz.stat.currentExam.totalAnswers"] = numQuestions;
     });
+  
 });
+
 
 // Met à jour la note courante de l'utilisateur selon les données contenues dans le localStorage
 function updateStats() {
