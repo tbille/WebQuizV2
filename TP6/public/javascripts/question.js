@@ -46,17 +46,27 @@ function updateStats() {
 
 var app = angular.module("monApp",[]);
 var myId;
-app.controller("question",function($scope,$http){
-    $http.get("/getRandomQuestion").success(function(data){
-        myId=data.idQuestion;
-        $scope.question=data.question;
-        $scope.domain=data.domain;
-        $scope.answers=data.answers;
-    }).error(function(){
-        alert("Erreur : redirection")
-    });
+app.controller("questionC",function($scope,$http,questionS){
+    $scope.getQuestion=function(){
+        questionS.getRandomQuestion($http,function(maquestion){
+            myId=maquestion.idQuestion;
+            $scope.question=maquestion.question;
+            $scope.domain=maquestion.domain;
+            $scope.answers=maquestion.answers;
+        });
 
-    $scope.corriger=function(){
+    };
+});
+
+app.service("questionS",function(){
+    this.getRandomQuestion = function($http,callback){
+        $http.get("/getRandomQuestion").success(function(data){
+            callback(data);
+        }).error(function(){
+            alert("Erreur : redirection");
+        });
+    };
+    /*    $scope.corriger=function(){
 
         // Valider la bonne ou mauvaise réponse
         var checkedRadio = $('input[name=answer]:checked');
@@ -72,16 +82,17 @@ app.controller("question",function($scope,$http){
             } 
             else {
                 $(checkedRadio).parent().css("background-color", "red");
-                $("input[value=" + correctAnswer + "]").parent().css("background-color", "lightgreen");
-            } 
+                $("input[value=" + data.correctAnswer + "]").parent().css("background-color", "lightgreen");
+            }
+            $("a.correct").text("Question suivante");
+            $("a.correct").removeClass("correct");
+            $("a.correct").addClass("next");
+            $("a.correct").unbind("click");
         }).error(function(){
             alert("Erreur : redirection")
         });
- 
- 
-    };
+    };*/
 });
-
 
 /*       if (checkedRadio.val() == correctAnswer) {
             $(checkedRadio).parent().css("background-color", "lightgreen");

@@ -12,10 +12,10 @@ block stylesheet
         script(type="text/javascript" src="/javascripts/questionExam.js")
 block content
     div(ng-app="monApp")
-        div(ng-controller="question")
+        div(ng-controller="questionC")
             section#main
                 h1= title
-                section
+                section(ng-init="getQuestion()")
                     h2  Domaine: 
                         span#domain {{domain}}
                     p
