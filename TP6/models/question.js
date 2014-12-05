@@ -11,7 +11,7 @@ var QuestionSchema = new Schema({
 });
 QuestionSchema.plugin(random);
 
-var Question = mongoose.model('Question', QuestionSchema);
+var Question = mongoose.model('Question', QuestionSchema, 'questions');
 
 module.exports = {
 
