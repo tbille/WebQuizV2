@@ -125,16 +125,6 @@ router.post('/questionExamen', function(req, res) {
 
 });
 
-router.get('/addGoodAnswerTest', function(req,res) {
-    console.log(req.session.goodAnswerTest);
-    if(req.session.totalAnswersTest!=null){
-        req.session.goodAnswerTest=req.session.goodAnswerTest+1;
-    }
-    else{
-        req.session.goodAnswerTest=0;
-    }    
-    res.json();
-});
 
 router.get('/addTotalAnswerTest', function(req,res) {
     console.log(req.session.totalAnswersTest);

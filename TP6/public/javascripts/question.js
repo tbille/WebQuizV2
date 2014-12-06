@@ -64,7 +64,7 @@ app.service("questionS",function(){
         });
     };
     this.addGood=function($http,callback){
-        $http.get("/addGoodAnswer").success(function(data){
+        $http.get("/addGoodAnswerTest").success(function(data){
             callback();
         }).error(function(){
             alert("Erreur : endExam")
