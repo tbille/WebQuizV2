@@ -4,22 +4,8 @@ var Question = require('../models/question');
 var StatsExam = require('../models/statsExam.js');  //added by GT
 
 /* GET home page. */
-router.get('/', function(req, res) {
-
-  //GT comment: Tester la fonction pour obtenir la moyenne cumulative des examens 
-  StatsExam.getAverageStatExam(function(err,element){
-      if(err){
-        console.log(err);
-      }
-      else{
-        console.log(element);
-        
-        
-        res.render('accueil');
-      }
-    });
-
-  
+router.get('/', function(req, res) {        
+    res.render('accueil');
 });
 
 
@@ -135,7 +121,12 @@ router.get('/addGoodAnswer', function(req,res) {
 
 router.get('/examenTermine', function(req, res) {
     var domains = req.session.domains;
-    res.render('examenTermine', { domains: JSON.stringify(domains), goodAnswers: req.session.goodAnswer, totalAnswers: req.session.numQuestions } );
+    StatsExam.addStatsExam(domains, req.session.goodAnswer, req.session.totalAnswers, function(err) {
+        if (err) {
+            res.send(err);
+        }
+        res.render('examenTermine', { domains: JSON.stringify(domains), goodAnswers: req.session.goodAnswer, totalAnswers: req.session.numQuestions } );
+    });
 });
 
 router.get('/instruction', function(req, res) {
