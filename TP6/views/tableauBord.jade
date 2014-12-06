@@ -43,9 +43,10 @@ block content
                     section
                         p Note cummulative test rapide :
                         p
-                            span#quickTestGood 0 
-                            |/ 
-                            span#quickTestTotal 0
+                            div(ng-init="getStatusTest()")
+                                span#quickTestGood {{goodAnswers}}
+                                |/ 
+                                span#quickTestTotal {{totalAnswers}}
                     section
                         p Note moyenne des examens :
                         p#examAverage ---

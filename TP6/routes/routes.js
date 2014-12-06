@@ -46,6 +46,17 @@ router.get('/getStatusAnswers', function(req,res){
     res.json({ goodAnswers: req.session.goodAnswer, totalAnswers: req.session.numQuestions });
 });
 
+router.get('/getStatusAnswersTest', function(req,res){
+    console.log('test');
+    if(req.session.goodAnswerTest==null){
+        req.session.goodAnswerTest=0;
+        req.session.totalAnswersTest=0;
+        res.json({ goodAnswers: req.session.goodAnswerTest, totalAnswers: req.session.totalAnswersTest });
+    }
+    else
+        res.json({ goodAnswers: req.session.goodAnswerTest, totalAnswers: req.session.totalAnswersTest });
+});
+
 router.get('/getRandomQuestion', function(req,res){
     Question.getRandomQuestion(function(err, qa) {
         if (err) {
@@ -90,13 +101,13 @@ router.get('/questionExamen', function(req, res) {
 
 router.get('/getQuestion', function(req,res){
     // je récupere la question courante
-        Question.getQuestionById(req.session.ids[req.session.currentQAIndex], function(err, qa) {
-            if (err) {
-                res.send(err);
-            }
-            req.session.currentQAIndex=req.session.currentQAIndex+1;
-            res.json({ idQuestion: qa._id , question: qa.question, domain: qa.domain,  answers: qa.answers} );
-        });
+    Question.getQuestionById(req.session.ids[req.session.currentQAIndex], function(err, qa) {
+        if (err) {
+            res.send(err);
+        }
+        req.session.currentQAIndex=req.session.currentQAIndex+1;
+        res.json({ idQuestion: qa._id , question: qa.question, domain: qa.domain,  answers: qa.answers} );
+    });
 
 });
 
@@ -112,6 +123,28 @@ router.post('/questionExamen', function(req, res) {
     });
 
 
+});
+
+router.get('/addGoodAnswerTest', function(req,res) {
+    console.log(req.session.goodAnswerTest);
+    if(req.session.totalAnswersTest!=null){
+        req.session.goodAnswerTest=req.session.goodAnswerTest+1;
+    }
+    else{
+        req.session.goodAnswerTest=0;
+    }    
+    res.json();
+});
+
+router.get('/addTotalAnswerTest', function(req,res) {
+    console.log(req.session.totalAnswersTest);
+    if(req.session.totalAnswersTest!=null){
+        req.session.totalAnswersTest=req.session.totalAnswersTest+1;
+    }
+    else{
+        req.session.totalAnswersTest=0;
+    }    
+    res.json();
 });
 
 router.get('/addGoodAnswer', function(req,res) {

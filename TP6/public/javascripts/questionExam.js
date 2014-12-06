@@ -22,10 +22,8 @@ app.controller("questionC",function($scope,$http,questionS){
                 var checkedRadio = $('input[name=answer]:checked');
                 if (checkedRadio.val() == correction) {
                     questionS.addGood($http,function(){
-
                             $(checkedRadio).parent().css("background-color", "lightgreen");
                         });
-
                 } 
                 else {
                     $(checkedRadio).parent().css("background-color", "red");
@@ -94,8 +92,6 @@ app.service("questionS",function(){
             callback(data);
         }).error(function(){
             alert("Erreur : endExam")
-        });
-
-        
+        });     
     }
 });
