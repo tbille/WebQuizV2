@@ -55,6 +55,6 @@ module.exports = {
           callback(err, examAverage);
           });
     },
-    
+  
   
 }

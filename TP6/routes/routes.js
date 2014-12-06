@@ -1,14 +1,13 @@
 var express = require('express');
 var router = express.Router();
 var Question = require('../models/question');
-var statsExam = require('../models/statsExam.js');  //added by GT
-var statsTest = require('../models/statsTest.js');  //added by GT
+var StatsExam = require('../models/statsExam.js');  //added by GT
 
 /* GET home page. */
 router.get('/', function(req, res) {
 
   //GT comment: Tester la fonction pour obtenir la moyenne cumulative des examens 
-  statsExam.getAverageStatExam(function(err,element){
+  StatsExam.getAverageStatExam(function(err,element){
       if(err){
         console.log(err);
       }
@@ -20,19 +19,7 @@ router.get('/', function(req, res) {
       }
     });
 
-    //GT comment: Tester la fonction pour obtenir la moyenne cumulative des tests rapides 
-    statsTest.getAverageStatTest(function(err,element){
-        if(err){
-          console.log(err);
-        }
-        else{
-          console.log(element);
-
-
-          res.render('accueil');
-        }
-      });
-
+  
 });
 
 
@@ -160,15 +147,20 @@ router.get('/ajouterTousLesQuestions', function(req, res) {
 });
 
 
+//added by GT : TESTER l'ajout des notes d'examen avec la page essaiAjoutNoteBD
+router.get('/essaiAjoutNoteBD', function(req, res) {
+    res.render('essaiAjoutNoteBD');
+});
+
 
 // added by GT : Met à jour la note examen dans la bd collection statsExam
 
 router.post('/examenTermine', function(req, res) {
-    var domains = [].concat(req.session.domains);
-    var goodAnswers = req.session.goodAnswers;
-    var totalAnswers = req.session.totalAnswers;
+    var domains = [].concat(req.body.domains);
+    var goodAnswers = req.body.goodAnswers;
+    var totalAnswers = req.body.totalAnswers;
    
-    StatsExam.addStatsExam(domains, goodAnswers, answers, totalAnswers, function(err) {
+    StatsExam.addStatsExam(domains, goodAnswers, totalAnswers, function(err) {
         if (err) {
             res.send(err);
         }
