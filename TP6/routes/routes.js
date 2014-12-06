@@ -6,8 +6,38 @@ var statsTest = require('../models/statsTest.js');  //added by GT
 
 /* GET home page. */
 router.get('/', function(req, res) {
-    res.render('accueil');
+  //GT comment: Tester la fonction pour obtenir la moyenne cumulative des examens 
+  statsExam.getAverageStatExam(function(err,element){
+      if(err){
+        console.log(err);
+      }
+      else{
+        console.log(element);
+        
+        
+        res.render('accueil');
+      }
+    });
+
+    //GT comment: Tester la fonction pour obtenir la moyenne cumulative des tests rapides 
+    statsTest.getAverageStatTest(function(err,element){
+        if(err){
+          console.log(err);
+        }
+        else{
+          console.log(element);
+
+
+          res.render('accueil');
+        }
+      });
+
+  
 });
+
+
+
+
 
 // route qui me permet de récuperer le nombre de questions par domaine
 router.get('/getNumberOfQuestionsDomaine', function(req,res){
