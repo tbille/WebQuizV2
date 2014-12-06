@@ -8,7 +8,7 @@ block stylesheet
         script(type="text/javascript" src="/javascripts/question.js")
     else if (type === "Exam")
         script(type="text/javascript").
-            var numQuestions = !{numQuestions};
+            //var numQuestions = !{numQuestions};
         script(type="text/javascript" src="/javascripts/questionExam.js")
 block content
     div(ng-app="monApp")
@@ -37,6 +37,6 @@ block content
                     h2 Statistiques
                     p Note courante :
                     p   
-                        span#goodAnswers 0 
+                        span#goodAnswers {{ goodAnswers }}
                         |/ 
-                        span#totalAnswers 0
+                        span#totalAnswers {{ totalAnswers }}

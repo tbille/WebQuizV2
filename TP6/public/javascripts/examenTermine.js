@@ -1,11 +1,9 @@
+
+
 // Actions à poser dès que le document est chargé
 $(document).ready(function() {
-    var goodAnswers = parseInt(localStorage["quiz.stat.currentExam.goodAnswers"]);
-    var totalAnswers = parseInt(localStorage["quiz.stat.currentExam.totalAnswers"]);
-    $("span#goodAnswers").text(goodAnswers);
-    $("span#totalAnswers").text(totalAnswers);
-
-    saveExam(goodAnswers, totalAnswers);
+    var goodAnswers = $("span#goodAnswers").text();
+    var totalAnswers = $("span#totalAnswers").text();
 
     updateMessage(goodAnswers, totalAnswers);
 });
