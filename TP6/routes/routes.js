@@ -154,7 +154,7 @@ router.get('/addGoodAnswer', function(req,res) {
 
 router.get('/examenTermine', function(req, res) {
     var domains = req.session.domains;
-    StatsExam.addStatsExam(domains, req.session.goodAnswer, req.session.totalAnswers, function(err) {
+    StatsExam.addStatsExam(domains, req.session.goodAnswer, req.session.numQuestions, function(err) {
         if (err) {
             res.send(err);
         }
@@ -195,21 +195,6 @@ router.get('/essaiAjoutNoteBD', function(req, res) {
     res.render('essaiAjoutNoteBD');
 });
 
-
-// added by GT : Met à jour la note examen dans la bd collection statsExam
-
-router.post('/examenTermine', function(req, res) {
-    var domains = [].concat(req.body.domains);
-    var goodAnswers = req.body.goodAnswers;
-    var totalAnswers = req.body.totalAnswers;
-   
-    StatsExam.addStatsExam(domains, goodAnswers, totalAnswers, function(err) {
-        if (err) {
-            res.send(err);
-        }
-        res.redirect('/examenTermine');
-    });
-});
 
 
 // Module exports
