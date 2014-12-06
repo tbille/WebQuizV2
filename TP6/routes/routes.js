@@ -6,6 +6,13 @@ var statsTest = require('../models/statsTest.js');  //added by GT
 
 /* GET home page. */
 router.get('/', function(req, res) {
+
+    statsTest.addStatsExam('dom','sdflsdkf','sdfsldf',function(err,element){
+    });
+
+    statsTest.getAverageStat(function(res){
+        console.log("salut : " + element);
+    });
     res.render('accueil');
 });
 
@@ -45,7 +52,6 @@ router.get('/getRandomQuestion', function(req,res){
         if (err) {
             res.send(err);
         }
-        console.log(qa);
         res.json({ idQuestion: qa._id , question: qa.question, domain: qa.domain,  answers: qa.answers } );
     });
 });
@@ -65,47 +71,37 @@ router.get('/getCorrectAnswer/:id',function(req,res){
     });
 });
 
-
 router.get('/question', function(req, res) {
-    /*Question.getRandomQuestion(function(err, qa) {
-        if (err) {
-            res.send(err);
-        }
-        console.log(qa);
-        res.render('question', { title: "Test rapide", type: "Test", qa: qa } );
-    });*/
-
     res.render('question', { title: "Test rapide", type: "Test" } );
 });
 
 router.get('/questionExamen', function(req, res) {
-    var ids = req.session.ids;
-    var id = ids[req.session.currentQAIndex];
-    console.log(id);
-    Question.getQuestionById(id, function(err, qa) {
-        if (err) {
-            res.send(err);
-        }
-        console.log(qa);
-        req.session.currentQAIndex = req.session.currentQAIndex + 1;
-        res.render('question', { title: "Examen Officiel", type: "Exam", numQuestions: ids.length, qa: qa } );
-    });
+    res.render('question', { title: "Examen Officiel", type: "Exam" } );
 });
 
 
-router.post('/questionExamen', function(req, res) {
-    var domains = [].concat(req.session.domain);
-    req.session.domains = domains;
-    var numQuestions = req.session.numQuestions;
-    req.session.currentQAIndex = 0;
-
-    Question.getRandomIDs(domains, numQuestions, function(err, questionIDs) {
+router.get('/getQuestion', function(req,res){
+    Question.getQuestionById(req.session.ids[req.session.currentQAIndex], function(err, qa) {
         if (err) {
             res.send(err);
         }
-        req.session.ids = questionIDs;
-        res.redirect('/questionExamen');
+        req.session.currentQAIndex=req.session.currentQAIndex+1;
+        res.json({ idQuestion: qa._id , question: qa.question, domain: qa.domain,  answers: qa.answers, numQuestions: numQuestions} );
     });
+});
+
+router.post('/questionExamen', function(req, res) {
+    var domains = [].concat(req.body.domain);
+    var numQuestions = req.body.numQuestions;
+    req.session.domains = domains;
+    Question.getRandomIDs(domains,numQuestions,function(err,element){
+        
+        req.session.currentQAIndex = 0;
+        req.session.ids=element;
+        res.redirect("/questionExamen");
+    });
+
+
 });
 
 router.get('/examenTermine', function(req, res) {

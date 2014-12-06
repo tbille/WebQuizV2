@@ -54,7 +54,39 @@ app.controller("questionC",function($scope,$http,questionS){
             $scope.domain=maquestion.domain;
             $scope.answers=maquestion.answers;
         });
+    };
+    $scope.correctionQuestion=function(){
+        if($("a.correct").text()=="Corriger"){
+            questionS.corriger($http, function(correction){
+                // Valider la bonne ou mauvaise réponse
+                var checkedRadio = $('input[name=answer]:checked');
+                if (checkedRadio.val() == correction) {
+                    $(checkedRadio).parent().css("background-color", "lightgreen");
+                    
+                    // Ajout d'une bonne réponse dans le score
+                    //var goodAnswers = localStorage["quiz.stat.currentTest.goodAnswers"];
+                    //localStorage["quiz.stat.currentTest.goodAnswers"] = parseInt(goodAnswers) + 1;
+                } 
+                else {
+                    $(checkedRadio).parent().css("background-color", "red");
+                    $("input[value=" + correction + "]").parent().css("background-color", "lightgreen");
+                }
+                $("a.correct").text("Question suivante");
+                $("a.correct").addClass("next");
+                $("a.correct").removeClass("correct");
+                
 
+            });
+        }
+        else if($("a.next").text()=="Question suivante"){
+            $("a.next").addClass("correct");
+            $("a.next").removeClass("next");
+            $("a.correct").text("Corriger");
+            $scope.getQuestion();
+        }
+        else{
+            
+        }
     };
 });
 
@@ -66,42 +98,11 @@ app.service("questionS",function(){
             alert("Erreur : redirection");
         });
     };
-    /*    $scope.corriger=function(){
-
-        // Valider la bonne ou mauvaise réponse
-        var checkedRadio = $('input[name=answer]:checked');
+    this.corriger=function($http,callback){
         $http.get("/getCorrectAnswer/"+myId).success(function(data){
-            //alert("test : " + data.correctAnswer);
-
-            if (checkedRadio.val() == data.correctAnswer) {
-                $(checkedRadio).parent().css("background-color", "lightgreen");
-                
-                // Ajout d'une bonne réponse dans le score
-                //var goodAnswers = localStorage["quiz.stat.currentTest.goodAnswers"];
-                //localStorage["quiz.stat.currentTest.goodAnswers"] = parseInt(goodAnswers) + 1;
-            } 
-            else {
-                $(checkedRadio).parent().css("background-color", "red");
-                $("input[value=" + data.correctAnswer + "]").parent().css("background-color", "lightgreen");
-            }
-            $("a.correct").text("Question suivante");
-            $("a.correct").removeClass("correct");
-            $("a.correct").addClass("next");
-            $("a.correct").unbind("click");
+            callback(data.correctAnswer);
         }).error(function(){
             alert("Erreur : redirection")
         });
-    };*/
+    };
 });
-
-/*       if (checkedRadio.val() == correctAnswer) {
-            $(checkedRadio).parent().css("background-color", "lightgreen");
-            
-            // Ajout d'une bonne réponse dans le score
-            var goodAnswers = localStorage["quiz.stat.currentTest.goodAnswers"];
-            localStorage["quiz.stat.currentTest.goodAnswers"] = parseInt(goodAnswers) + 1;
-        } 
-        else {
-            $(checkedRadio).parent().css("background-color", "red");
-            $("input[value=" + correctAnswer + "]").parent().css("background-color", "lightgreen");
-        }  */
