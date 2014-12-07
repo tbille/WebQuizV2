@@ -4,7 +4,20 @@ var Question = require('../models/question');
 var StatsExam = require('../models/statsExam.js');  //added by GT
 
 /* GET home page. */
-router.get('/', function(req, res) {        
+router.get('/', function(req, res) {    
+  
+    
+  //GT comment: Tester la fonction pour obtenir la liste des moyennes cumulatives des examens pour la liste
+ StatsExam.getListStatExam(function(err,element){
+  if(err){
+  console.log(err);
+  }
+  else{
+  console.log(element);
+  }
+  });  
+  
+  
     res.render('accueil');
 });
 
