@@ -50,7 +50,7 @@ module.exports = {
           }
           console.log("TotalGood Exam: " + totalGoodAnswers);
           console.log("TotalAnswers Exam: " + totalOfTotalAnswers);  
-          examAverage = (totalGoodAnswers /= totalOfTotalAnswers)
+          examAverage = (totalGoodAnswers /= totalOfTotalAnswers) * 100
           console.log("Exam average : " + examAverage);  
           callback(err, examAverage);
           });
