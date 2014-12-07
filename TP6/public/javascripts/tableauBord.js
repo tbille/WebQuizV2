@@ -48,8 +48,30 @@ app.controller("tdb",function($scope,$http,tdbS){
         });
     };
 
+    $scope.listeExams=function(){
+        tdbS.getAllQuestions($http,function(liste){
+            for (i = 0; i < liste.length; i++) {
+                     // Modifier la liste d'examen effectuée
+                var exam = liste[i];
+                var domains = "";
+                jQuery.each(exam.domains, function(index, value) {
+                    domains = domains + " " + value;
+                });
+
+                var examStr = "Examen " + (i + 1) + " (" + domains + " ) : " + exam.goodAnswers + " / " 
+                    + exam.totalAnswers;
+                $("section#lightbox ul li:last-child").after("<li>" + examStr + "</li>");
+
+                examAverage += exam.goodAnswers / exam.totalAnswers;
+            }
+        });
+    };
+
 });
 
+/*
+    Requetes HTTP vers le serveur
+ */
 app.service("tdbS",function(){
     this.getStatus=function($http,callback){
         $http.get("/getStatusAnswersTest").success(function(data){
@@ -86,6 +108,14 @@ app.service("tdbS",function(){
         }).error(function(){
           callback(0);
         });
+    };
+
+    this.getAllQuestions=function($http,callback){
+        $http.get("/getAllQuestions").success(function(data){
+            callback(data.listeQuestions);
+        }).error(function(){
+            alert("Erreur : getAllQuestions")
+        });  
     };
 });
 

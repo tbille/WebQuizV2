@@ -8,7 +8,7 @@ block stylesheet
 block content
     div(ng-app="monApp")
         div(ng-controller="tdb")
-            section#lightbox
+            section#lightbox(ng-init="listeExams()")
                 a.close_msg(href="#")
                 ul
                     li Résultats détaillés des examens

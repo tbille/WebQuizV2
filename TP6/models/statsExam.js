@@ -35,25 +35,27 @@ module.exports = {
           
         if (err) {
                 callback(err, null);
+        }
+        else{
+          console.log("yo : " + reps[0].goodAnswers);
+          var totalGoodAnswers = 0;
+          var totalOfTotalAnswers = 0;
+          var examAverage = 0;
+          var rep;
+          for(var i=0 ; i<reps.length; i++){
+            //console.log( reps[i].goodAnswers );
+              //examAverage += (reps[i].goodAnswers / reps[i].totalAnswers);
+              totalGoodAnswers += (reps[i].goodAnswers);
+              totalOfTotalAnswers += (reps[i].totalAnswers);
             }
-        console.log("yo : " + reps[0].goodAnswers);
-        var totalGoodAnswers = 0;
-        var totalOfTotalAnswers = 0;
-        var examAverage = 0;
-        var rep;
-        for(var i=0 ; i<reps.length; i++){
-          //console.log( reps[i].goodAnswers );
-            //examAverage += (reps[i].goodAnswers / reps[i].totalAnswers);
-            totalGoodAnswers += (reps[i].goodAnswers);
-            totalOfTotalAnswers += (reps[i].totalAnswers);
-          }
-          console.log("TotalGood Exam: " + totalGoodAnswers);
-          console.log("TotalAnswers Exam: " + totalOfTotalAnswers);
-          console.log("nombre de document: " + StatsExam.count(callback))
-          examAverage = (totalGoodAnswers /= totalOfTotalAnswers) * 100
-          console.log("Exam average : " + parseInt(examAverage));  
-          callback(err, parseInt(examAverage));
-          });
+            console.log("TotalGood Exam: " + totalGoodAnswers);
+            console.log("TotalAnswers Exam: " + totalOfTotalAnswers);
+            //console.log("nombre de document: " + StatsExam.count(callback))
+            examAverage = (totalGoodAnswers /= totalOfTotalAnswers) * 100
+            console.log("Exam average : " + parseInt(examAverage));  
+            callback(err, parseInt(examAverage));
+        }
+      });
     },
   
   
@@ -63,21 +65,11 @@ module.exports = {
           
         if (err) {
                 callback(err, null);
-            }
-        var totalGoodAnswers = 0;
-        var totalOfTotalAnswers = 0;
-        var examAverage = 0;
-        var rep;
-        var listExams = []
-        
-        for(var i=0 ; i<reps.length; i++){
-        console.log(reps[i].domains, reps[i].goodAnswers, reps[i].totalAnswers);       
-          listExams += reps[i].domains, reps[i].goodAnswers, reps[i].totalAnswers;
-          }
-        
-        console.log("tableau: " + reps);
-        callback(err, reps);
-          });
+        }else{
+
+          callback(err, reps);
+        }
+        });
     },
   
   

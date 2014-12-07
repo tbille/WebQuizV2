@@ -28,7 +28,12 @@ router.get('/getAverageExams', function(req,res){
             res.json({moyenne: 0});
         }
         else{
-            res.json({moyenne: average});
+            console.log(average);
+            if (average==undefined) {
+                res.json({moyenne: 0});
+            }
+            else
+                res.json({moyenne: average});
         }
     });
 });
@@ -70,7 +75,7 @@ router.get('/getStatusAnswers', function(req,res){
 
 router.get('/getStatusAnswersTest', function(req,res){
     console.log('test');
-    if(req.session.goodAnswerTest==null){
+    if(req.session.goodAnswerTest==undefined){
         req.session.goodAnswerTest=0;
         req.session.totalAnswersTest=0;
         res.json({ goodAnswers: req.session.goodAnswerTest, totalAnswers: req.session.totalAnswersTest });
@@ -89,6 +94,10 @@ router.get('/getRandomQuestion', function(req,res){
 });
 
 router.get('/tableauBord', function(req, res) {
+    if(req.session.goodAnswerTest==undefined){
+        req.session.goodAnswerTest=0;
+        req.session.totalAnswersTest=0;
+    }
     res.render('tableauBord');
 });
 
@@ -147,10 +156,19 @@ router.post('/questionExamen', function(req, res) {
 
 });
 
+router.get('/getAllQuestions',function(req,res){
+   StatsExam.getListStatExam(function(erreur,listeQuestions){
+        if(erreur){
+            res.json({listeQuestions: []});
+        }
+        else
+            res.json({listeQuestions: listeQuestions});
+   }); 
+});
 
 router.get('/addTotalAnswerTest', function(req,res) {
     console.log(req.session.totalAnswersTest);
-    if(req.session.totalAnswersTest!=null){
+    if(req.session.totalAnswersTest!=undefined){
         req.session.totalAnswersTest=req.session.totalAnswersTest+1;
     }
     else{
@@ -206,7 +224,17 @@ router.get('/ajouterTousLesQuestions', function(req, res) {
 router.get('/essaiAjoutNoteBD', function(req, res) {
     res.render('essaiAjoutNoteBD');
 });
-
+router.post('/examenTermine', function(req, res) {
+var domains = [].concat(req.body.domains);
+var goodAnswers = req.body.goodAnswers;
+var totalAnswers = req.body.totalAnswers;
+StatsExam.addStatsExam(domains, goodAnswers, totalAnswers, function(err) {
+if (err) {
+res.send(err);
+}
+res.redirect('/examenTermine');
+});
+});
 
 
 // Module exports
