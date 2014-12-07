@@ -48,6 +48,7 @@ module.exports = {
               totalGoodAnswers += (reps[i].goodAnswers);
               totalOfTotalAnswers += (reps[i].totalAnswers);
             }
+
             console.log("TotalGood Exam: " + totalGoodAnswers);
             console.log("TotalAnswers Exam: " + totalOfTotalAnswers);
             //console.log("nombre de document: " + StatsExam.count(callback))
