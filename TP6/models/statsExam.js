@@ -37,7 +37,6 @@ module.exports = {
                 callback(err, null);
         }
         else{
-          console.log("yo : " + reps[0].goodAnswers);
           var totalGoodAnswers = 0;
           var totalOfTotalAnswers = 0;
           var examAverage = 0;
@@ -73,6 +72,10 @@ module.exports = {
         });
     },
   
-  
+  razBase: function(callback){
+    StatsExam.remove({}, function(err) { 
+      console.log('collection removed') 
+    });  
+  }
   
 }

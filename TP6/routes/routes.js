@@ -101,6 +101,19 @@ router.get('/tableauBord', function(req, res) {
     res.render('tableauBord');
 });
 
+router.get('/raz', function(req, res) {
+
+        
+
+        StatsExam.razBase(function(){
+            req.session.goodAnswerTest=0;
+        req.session.totalAnswersTest=0;
+            res.render('tableauBord');
+        })
+
+    
+});
+
 
 router.get('/getCorrectAnswer/:id',function(req,res){
     Question.getQuestionById({_id: req.params.id}, function(error,element){
