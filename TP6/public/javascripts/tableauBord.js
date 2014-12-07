@@ -5,7 +5,7 @@ app.controller("tdb",function($scope,$http,tdbS){
     // Page Courante
     $("a#tableauBord").addClass("current");
     // permet d'activer le bouton pour l'examen
-    countDomainQuestions($("input[name='domain']:checked"),$http, function(nbQuestions){
+    tdbS.countDomainQuestions($("input[name='domain']:checked"),$http, function(nbQuestions){
         if(nbQuestions>0){
             $scope.disabled = false;
             $("input[type='number']").attr("min", 1);
@@ -14,8 +14,11 @@ app.controller("tdb",function($scope,$http,tdbS){
         else
             $scope.disabled = true;
     });
+    /*
+        Fonction de mise à jour des checkbox
+     */
     $scope.disable=function(){
-        countDomainQuestions($("input[name='domain']:checked"),$http, function(nbQuestions){
+        tdbS.countDomainQuestions($("input[name='domain']:checked"),$http, function(nbQuestions){
             if(nbQuestions>0){
                 $scope.disabled = false;
                 $("input[type='number']").attr("min", 1);
@@ -26,14 +29,19 @@ app.controller("tdb",function($scope,$http,tdbS){
         });
     };
 
-
+    /*
+        Fonction qui récupere le status des tests rapides
+    */
     $scope.getStatusTest=function(){
         tdbS.getStatus($http,function(data){
             $scope.goodAnswers=data.goodAnswers;
             $scope.totalAnswers=data.totalAnswers;
-        })
+        });
     };
 
+    /*
+        Fonction qui récupère la moyenne des examens
+     */
     $scope.getAverageExam=function(){
         tdbS.getAverage($http,function(data){
             $scope.examAverage=data;
@@ -58,29 +66,30 @@ app.service("tdbS",function(){
             alert("Erreur : getAverage")
         });   
     };
+
+    this.countDomainQuestions=function(checkedDomains,$http,callback) {
+        $http.get("/getNumberOfQuestionsDomaine").success(function(data){
+            var domains = jQuery.map(checkedDomains, function(checkbox, i) {
+                return $(checkbox).val();
+            });
+            var count=0;
+            if (domains.inArray("HTML")) {
+                count+=data.domaines[0];
+            }
+            if (domains.inArray("CSS")) {
+                count+=data.domaines[1];
+            }
+            if (domains.inArray("JS")) {
+                count+=data.domaines[2];
+            }
+            callback(count);
+        }).error(function(){
+          callback(0);
+        });
+    };
 });
 
 
-var countDomainQuestions = function(checkedDomains,$http,callback) {
-    $http.get("/getNumberOfQuestionsDomaine").success(function(data){
-        var domains = jQuery.map(checkedDomains, function(checkbox, i) {
-            return $(checkbox).val();
-        });
-        count=0;
-        if (domains.inArray("HTML")) {
-            count+=data.domaines[0];
-        }
-        if (domains.inArray("CSS")) {
-            count+=data.domaines[1];
-        }
-        if (domains.inArray("JS")) {
-            count+=data.domaines[2];
-        }
-        callback(count);
-    }).error(function(){
-      callback(0);
-    });
-}
 
 Array.prototype.inArray = function(value) {
     // Returns true if the passed value is found in the

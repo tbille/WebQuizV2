@@ -15,7 +15,6 @@ var StatsExam = mongoose.model('StatsExam', StatsExamSchema, 'StatsExam');
 
 
 module.exports = {
-
     addStatsExam: function(domains, goodAnswers, totalAnswers, callback) {
         var StatsExamModel = new StatsExam();
         StatsExamModel.domains = domains
