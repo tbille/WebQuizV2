@@ -9,7 +9,16 @@ router.get('/', function(req, res) {
 });
 
 
-
+router.get('/getAverageExams', function(req,res){
+    StatsExam.getAverageStatExam(function(err,average){
+        if(err){
+            res.json({moyenne: 0});
+        }
+        else{
+            res.json({moyenne: average});
+        }
+    });
+});
 
 
 // route qui me permet de récuperer le nombre de questions par domaine

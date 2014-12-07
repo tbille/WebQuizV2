@@ -49,7 +49,7 @@ block content
                                 span#quickTestTotal {{totalAnswers}}
                     section
                         p Note moyenne des examens :
-                        p#examAverage {{examAverage}} %
+                        p#examAverage(ng-init="getAverageExam()") {{examAverage}} %
                     p
                         a.button(href="#lightbox") Voir détails ...
                     p

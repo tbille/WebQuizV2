@@ -34,6 +34,12 @@ app.controller("tdb",function($scope,$http,tdbS){
         })
     };
 
+    $scope.getAverageExam=function(){
+        tdbS.getAverage($http,function(data){
+            $scope.examAverage=data;
+        });
+    };
+
 });
 
 app.service("tdbS",function(){
@@ -43,6 +49,14 @@ app.service("tdbS",function(){
         }).error(function(){
             alert("Erreur : endExam")
         });     
+    };
+
+    this.getAverage=function($http,callback){
+        $http.get("/getAverageExams").success(function(data){
+            callback(data.moyenne);
+        }).error(function(){
+            alert("Erreur : getAverage")
+        });   
     };
 });
 
