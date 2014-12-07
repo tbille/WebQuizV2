@@ -67,21 +67,21 @@ app.service("questionS",function(){
         $http.get("/addGoodAnswerTest").success(function(data){
             callback();
         }).error(function(){
-            alert("Erreur : endExam")
+           console.log("Erreur : endExam")
         });
     };
     this.getStatus=function($http,callback){
         $http.get("/getStatusAnswersTest").success(function(data){
             callback(data);
         }).error(function(){
-            alert("Erreur : endExam")
+          console.log("Erreur : endExam")
         });     
     };
     this.addTotal=function($http,callback){
         $http.get("/addTotalAnswerTest").success(function(data){
             callback();
         }).error(function(){
-            alert("Erreur : endExam")
+          console.log("Erreur : endExam")
         });
     };
 });
